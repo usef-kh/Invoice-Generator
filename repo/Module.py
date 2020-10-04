@@ -7,7 +7,7 @@ class Module:
 
     def __init__(self, root):
         self.root = root
-        self.root.wm_iconbitmap('logo.ico')
+        self.root.wm_iconbitmap('Graphics/logo.ico')
 
         self.target_xlsx = None
         self.target_pdf = None

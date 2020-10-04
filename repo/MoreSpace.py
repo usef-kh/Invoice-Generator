@@ -329,7 +329,7 @@ class MoreSpace(Module):
         worksheet = workbook['MoreSpace']
 
         # add image
-        img = openpyxl.drawing.image.Image('logo.png')
+        img = openpyxl.drawing.image.Image('Graphics/logo.png')
         img.width = 85
         img.height = 85
         img.anchor = 'A2'

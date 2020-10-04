@@ -8,7 +8,7 @@ class InvoiceGenerator:
 
     def __init__(self):
         self.root = tk.Tk()
-        self.root.wm_iconbitmap('logo.ico')
+        self.root.wm_iconbitmap('Graphics/logo.ico')
         self.modules = ["More Space", "Media Space", "Fabrication Services", "CNC Milling"]
 
         self.create_menubar()
