@@ -41,9 +41,26 @@ class MediaSpace(Module):
             tk.Label(frame, text=text, font=('Arial', 12), padx=10, width=6).grid(row=0, column=i, padx=10)
 
         options = []
-        for i in range(24):
-            options.append(str(i) + ':' + '00')
-            options.append(str(i) + ':' + '30')
+        for i in range(12):
+            str_num = str(i)
+
+            if len(str_num) == 1:
+                str_num = '0' + str_num
+
+            options.append(str_num + ':' + '00 am')
+            options.append(str_num + ':' + '30 am')
+
+        options.append('12' + ':' + '00 pm')
+        options.append('12' + ':' + '30 pm')
+
+        for i in range(1, 12):
+            str_num = str(i)
+
+            if len(str_num) == 1:
+                str_num = '0' + str_num
+
+            options.append(str_num + ':' + '00 pm')
+            options.append(str_num + ':' + '30 pm')
 
         self.reservation_details = dict()
         for i in range(3):
@@ -55,8 +72,8 @@ class MediaSpace(Module):
 
             timing_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
 
-            start_time = ttk.Combobox(timing_frame, values=options, width=5)
-            end_time = ttk.Combobox(timing_frame, values=options, width=5)
+            start_time = ttk.Combobox(timing_frame, values=options, width=8)
+            end_time = ttk.Combobox(timing_frame, values=options, width=8)
 
             start_time.grid(row=0, column=1)
             end_time.grid(row=0, column=2)
@@ -158,33 +175,23 @@ class MediaSpace(Module):
                 _date, timings = info
                 date = reformat(_date.get())
 
-                start_time, end_time = [timing.get() for timing in timings]
+                start, end = [timing.get() for timing in timings]
+
+                start_time, start_meridiem = start.split(' ')
+                end_time, end_meridiem = end.split(' ')
 
                 start_hr, start_min = [int(num) for num in start_time.split(':')]
                 end_hr, end_min = [int(num) for num in end_time.split(':')]
 
+                if start_meridiem == 'pm':
+                    start_hr += 12
+
+                if end_meridiem == 'pm':
+                    end_hr += 12
+
                 duration = end_hr - start_hr + end_min / 60 - start_min / 60
 
-                start_min = str(start_min)
-                end_min = str(end_min)
-
-                if len(start_min) < 2:
-                    start_min = '0' + start_min
-
-                if len(end_min) < 2:
-                    end_min = '0' + end_min
-
-                if start_hr > 12:
-                    start_time = str(start_hr - 12) + ':' + start_min + ' pm'
-                else:
-                    start_time = str(start_hr) + ':' + start_min + ' am'
-
-                if end_hr > 12:
-                    end_time = str(end_hr - 12) + ':' + end_min + ' pm'
-                else:
-                    end_time = str(end_hr) + ':' + end_min + ' am'
-
-                time = start_time + ' - ' + end_time
+                time = start + ' - ' + end
 
                 rate = float(self.SPACES['Rate'][name])
                 unit = self.SPACES['Unit'][name]
@@ -334,7 +341,6 @@ class MediaSpace(Module):
         os.remove(self.target_xlsx)
 
         os.startfile(self.target_pdf)
-
 
     def clear(self, *args):
         self.admin.delete(0, 'end')
