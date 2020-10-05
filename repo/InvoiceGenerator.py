@@ -81,7 +81,7 @@ class InvoiceGenerator:
 
     def clear(self):
         if self.current_module:
-            self.make_table.clear()
+            self.current_module.clear()
 
     def generate(self):
         if self.current_module:
