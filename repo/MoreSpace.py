@@ -3,7 +3,6 @@ import shutil
 import tkinter as tk
 from datetime import datetime, date, timedelta
 from tkinter import messagebox
-from tkinter import ttk
 
 import openpyxl
 from Module import Module
@@ -16,7 +15,7 @@ class MoreSpace(Module):
     def __init__(self, root):
         super(MoreSpace, self).__init__(root)
         self.root.title("Invoice Generator - More Space")
-        self.root.geometry('450x625')
+        self.root.geometry('450x585')
 
     def load_database(self):
         super(MoreSpace, self).load_database()

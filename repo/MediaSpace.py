@@ -15,7 +15,7 @@ class MediaSpace(Module):
     def __init__(self, root):
         super(MediaSpace, self).__init__(root)
         self.root.title("Invoice Generator - Media Space")
-        self.root.geometry('465x650')
+        self.root.geometry('465x610')
 
     def load_database(self):
         super(MediaSpace, self).load_database()
