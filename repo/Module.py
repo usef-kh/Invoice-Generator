@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import os
 import pandas as pd
 
@@ -49,6 +50,56 @@ class Module:
 
         self.customer, self.company, self.credit = entries
         frame.pack(padx=20, pady=2, anchor=tk.W)
+
+    def place_item_reservation_fields(self):
+        frame = tk.LabelFrame(self.master, text='Item Reservation', width=10, font=('Arial', 14), padx=10, pady=10,
+                              borderwidth=0, highlightthickness=0)
+
+        self.table_frame = tk.LabelFrame(frame, width=10, font=('Arial', 14), borderwidth=0, highlightthickness=0)
+
+        self.table_frame.pack(pady=5)
+
+        button_frame = tk.LabelFrame(frame, width=10, font=('Arial', 14), borderwidth=0, highlightthickness=0)
+
+        button = tk.Button(button_frame, text="Add Row", command=self.add_table_row)
+        button.pack()
+        button_frame.pack()
+
+        for i, text in enumerate(['Item', 'Rate', 'Quantity']):
+            tk.Label(self.table_frame, text=text, font=('Arial', 12), padx=10, width=6).grid(row=0, column=i, padx=10)
+        self.counter = 1
+        self.table_fields = dict()
+        self.add_table_row()
+
+
+        frame.pack(padx=20, pady=2, anchor=tk.W)
+
+    def add_table_row(self):
+        def set_rate(event):
+            table_entry = self.table_fields[event.widget]
+            choice = event.widget.get()
+
+            table_entry[0].delete(0, "end")
+            table_entry[0].insert(0, self.ITEMS['Rate'][choice])
+
+            table_entry[1].delete(0, "end")
+            table_entry[1].insert(0, 1)
+
+
+
+        item_field = ttk.Combobox(self.table_frame, values=list(self.ITEMS.index), font=('Arial', 9), width=25)
+        item_field.grid(row=self.counter, column=0, sticky="NSEW")
+
+        item_field.bind("<<ComboboxSelected>>", set_rate)
+
+        rate_field = tk.Entry(self.table_frame, fg="black", bg="white", font=('Arial', 11), width=3)
+        rate_field.grid(row=self.counter, column=1, sticky="NSEW")
+
+        qty_field = tk.Entry(self.table_frame, fg="black", bg="white", font=('Arial', 11), width=4)
+        qty_field.grid(row=self.counter, column=2, sticky="NSEW")
+        self.table_fields[item_field] = (rate_field, qty_field)
+
+        self.counter += 1
 
     def place_notes(self):
         frame = tk.LabelFrame(self.master, text='Notes', font=('Arial', 14), padx=10, pady=10, borderwidth=0,

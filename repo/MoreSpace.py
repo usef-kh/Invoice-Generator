@@ -30,7 +30,7 @@ class MoreSpace(Module):
         super(MoreSpace, self).place_admin_fields()
         super(MoreSpace, self).place_customer_fields()
         self.place_space_reservation_fields()
-        self.place_item_reservation_fields()
+        super(MoreSpace, self).place_item_reservation_fields()
         super(MoreSpace, self).place_notes()
         self.clear()
 
@@ -81,40 +81,6 @@ class MoreSpace(Module):
         self.discount = tk.Spinbox(detailsframe, from_=0, to=101, increment=5, wrap=True, width=4, justify=tk.LEFT)
         self.discount.grid(row=1, column=3, padx=10, sticky=tk.W)
         detailsframe.pack(anchor=tk.W)
-
-        frame.pack(padx=20, pady=2, anchor=tk.W)
-
-    def place_item_reservation_fields(self):
-        frame = tk.LabelFrame(self.master, text='Item Reservation', width=10, font=('Arial', 14), padx=10, pady=10,
-                              borderwidth=0, highlightthickness=0)
-        for i, text in enumerate(['Item', 'Rate', 'Quantity']):
-            tk.Label(frame, text=text, font=('Arial', 12), padx=10, width=6).grid(row=0, column=i, padx=10)
-
-        self.table_fields = dict()
-
-        def set_rate(event):
-            table_entry = self.table_fields[event.widget]
-            choice = event.widget.get()
-
-            table_entry[0].delete(0, "end")
-            table_entry[0].insert(0, self.ITEMS['Rate'][choice])
-
-            table_entry[1].delete(0, "end")
-            table_entry[1].insert(0, 1)
-
-        for i in range(5):
-            item_field = ttk.Combobox(frame, values=list(self.ITEMS.index), font=('Arial', 9), width=25)
-            # item_field = tk.Entry(frame, fg="black", bg="white")
-            item_field.grid(row=i + 1, column=0, sticky="NSEW")
-
-            item_field.bind("<<ComboboxSelected>>", set_rate)
-
-            rate_field = tk.Entry(frame, fg="black", bg="white", font=('Arial', 11), width=3)
-            rate_field.grid(row=i + 1, column=1, sticky="NSEW")
-
-            qty_field = tk.Entry(frame, fg="black", bg="white", font=('Arial', 11), width=4)
-            qty_field.grid(row=i + 1, column=2, sticky="NSEW")
-            self.table_fields[item_field] = (rate_field, qty_field)
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
