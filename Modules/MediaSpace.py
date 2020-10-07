@@ -4,7 +4,7 @@ from datetime import datetime, date
 from tkinter import messagebox
 from tkinter import ttk
 
-from Module import Module
+from Modules.Module import Module
 from tkcalendar import DateEntry
 
 

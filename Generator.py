@@ -1,6 +1,6 @@
 import tkinter as tk
-from MoreSpace import MoreSpace
-from MediaSpace import MediaSpace
+from Modules.MoreSpace import MoreSpace
+from Modules.MediaSpace import MediaSpace
 
 
 class InvoiceGenerator:

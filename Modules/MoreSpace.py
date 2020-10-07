@@ -3,7 +3,7 @@ import tkinter as tk
 from datetime import datetime, date, timedelta
 from tkinter import messagebox
 
-from Module import Module
+from Modules.Module import Module
 from tkcalendar import DateEntry
 
 
