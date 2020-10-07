@@ -1,9 +1,10 @@
 import tkinter as tk
-from Modules.MoreSpace import MoreSpace
+
 from Modules.MediaSpace import MediaSpace
+from Modules.MoreSpace import MoreSpace
 
 
-class InvoiceGenerator:
+class Generator:
 
     def __init__(self):
         self.root = tk.Tk()
@@ -101,4 +102,4 @@ class InvoiceGenerator:
 
 
 if __name__ == '__main__':
-    InvoiceGenerator()
+    Generator()

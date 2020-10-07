@@ -4,8 +4,9 @@ from datetime import datetime, date
 from tkinter import messagebox
 from tkinter import ttk
 
-from Modules.Module import Module
 from tkcalendar import DateEntry
+
+from Modules.Module import Module
 
 
 class MediaSpace(Module):
@@ -153,10 +154,10 @@ class MediaSpace(Module):
                 end_hr, end_min = [int(num) for num in end_time.split(':')]
 
                 # reformat timing to 24-hr format for calculations
-                if start_meridiem == 'pm':
+                if start_meridiem == 'pm' and start_hr != 12:
                     start_hr += 12
 
-                if end_meridiem == 'pm':
+                if end_meridiem == 'pm' and end_hr != 12:
                     end_hr += 12
 
                 duration = end_hr - start_hr + end_min / 60 - start_min / 60

@@ -3,8 +3,9 @@ import tkinter as tk
 from datetime import datetime, date, timedelta
 from tkinter import messagebox
 
-from Modules.Module import Module
 from tkcalendar import DateEntry
+
+from Modules.Module import Module
 
 
 class MoreSpace(Module):
