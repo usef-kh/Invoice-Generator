@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-from datetime import datetime
+from datetime import datetime, date
 from tkinter import messagebox
 from tkinter import ttk
 
@@ -87,7 +87,7 @@ class MediaSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, *args):
+    def generate(self, choice='PDF', *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str
@@ -120,32 +120,39 @@ class MediaSpace(Module):
 
             return res
 
+        def separate(string_date, split_char='/'):
+            string_date = string_date.split(split_char)
+            m, d, y = [int(num) for num in string_date]
+            return y, m, d
+
         admin, customer, company = self.admin.get(), self.customer.get(), self.company.get()
         credit = convert_to_num(self.credit.get())
 
         discount = convert_to_num(self.discount.get()) / 100
 
-        current_file_count = str(len(os.listdir('../Invoices/MediaSpace/')) + 1)
+        current_file_count = str(len(os.listdir('Invoices/MediaSpace/')) + 1)
         zeros = ''.join(['0'] * (5 - len(current_file_count.split())))
         invoice_number = zeros + current_file_count
 
         invoice_date = datetime.date(datetime.now()).strftime("%m/%d/%y")
+        days = {'mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6}
 
         billables, reservation_descriptions = [], []
         for space, info in self.reservation_details.items():
             if space.get():
                 name = space.get()
                 _date, timings = info
-                date = reformat(_date.get())
 
                 start, end = [timing.get() for timing in timings]
 
+                # seperate time from am/pm
                 start_time, start_meridiem = start.split(' ')
                 end_time, end_meridiem = end.split(' ')
 
                 start_hr, start_min = [int(num) for num in start_time.split(':')]
                 end_hr, end_min = [int(num) for num in end_time.split(':')]
 
+                # reformat timing to 24-hr format for calculations
                 if start_meridiem == 'pm':
                     start_hr += 12
 
@@ -153,14 +160,25 @@ class MediaSpace(Module):
                     end_hr += 12
 
                 duration = end_hr - start_hr + end_min / 60 - start_min / 60
-
                 time = start + ' - ' + end
 
-                rate = float(self.SPACES['Rate'][name])
-                unit = self.SPACES['Unit'][name]
+                # Choose rate based on weekday
+                display_name = name
+                dt = date(*separate(_date.get()))
+                if dt.weekday() == days['sun']:
+                    space_rate = 'Weekend Rate'
+                    display_name = name + ' - Weekend'
+                else:
+                    space_rate = 'Weekday Rate'
 
-                billables += [(name, duration, unit, rate)]
-                reservation_descriptions += [(date, time)]
+                # Extract quantities
+                rate = float(self.SPACES[space_rate][name])
+                unit = self.SPACES['Unit'][name]
+                booking_date = reformat(_date.get())
+
+                # Save info
+                billables += [(display_name, duration, unit, rate)]
+                reservation_descriptions += [(booking_date, time)]
 
         reserved_items = []
         for item, info in self.table_fields.items():
@@ -251,7 +269,7 @@ class MediaSpace(Module):
         hidden_entries.append((cells['credit'], credit))
         hidden_entries.append((cells['discount'], discount))
 
-        self.write(target, 'MediaSpace', entries, hidden_entries)
+        self.write(target, 'MediaSpace', entries, hidden_entries, choice)
 
     def clear(self, *args):
         self.admin.delete(0, 'end')

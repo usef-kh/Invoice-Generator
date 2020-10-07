@@ -88,7 +88,7 @@ class MoreSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, *args):
+    def generate(self, choice='PDF', *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str
@@ -151,7 +151,7 @@ class MoreSpace(Module):
         tool_exclusions = convert_to_num(self.tool_exclusions.get(), isFloat=False)
         discount = convert_to_num(self.discount.get()) / 100
 
-        current_file_count = str(len(os.listdir('../Invoices/MoreSpace/')) + 1)
+        current_file_count = str(len(os.listdir('Invoices/MoreSpace/')) + 1)
         zeros = ''.join(['0'] * (5 - len(current_file_count.split())))
         invoice_number = zeros + current_file_count
         invoice_date = datetime.date(datetime.now()).strftime("%m/%d/%y")
@@ -298,7 +298,7 @@ class MoreSpace(Module):
         hidden_entries = [(cells['credit'], credit),
                           (cells['discount'], discount)]
 
-        self.write(target, 'MoreSpace', hidden_entries)
+        self.write(target, 'MoreSpace', entries, hidden_entries, choice)
 
     def clear(self, *args):
         self.admin.delete(0, 'end')

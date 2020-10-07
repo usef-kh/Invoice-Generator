@@ -1,9 +1,7 @@
 import os
-import shutil
 import tkinter as tk
 from tkinter import ttk
 
-import openpyxl
 import pandas as pd
 from win32com import client
 
@@ -14,8 +12,8 @@ class Module:
         self.root = root
         self.root.wm_iconbitmap('Graphics/logo.ico')
 
-        self.target_xlsx = None
-        self.target_pdf = None
+        self.template_path = os.path.abspath('Templates.xlsx')
+        self.final_file_path = None
 
         self.master = tk.LabelFrame(self.root, borderwidth=0, highlightthickness=0)
         self.master.pack()
@@ -26,7 +24,7 @@ class Module:
         self.root.mainloop()
 
     def load_database(self):
-        self.database = pd.read_excel("../database.xlsx", sheet_name=None, index_col=None)
+        self.database = pd.read_excel("database.xlsx", sheet_name=None, index_col=None)
 
     def build_window(self):
         raise NotImplementedError
@@ -65,9 +63,14 @@ class Module:
 
         button_frame = tk.LabelFrame(frame, width=10, font=('Arial', 14), borderwidth=0, highlightthickness=0)
 
-        button = tk.Button(button_frame, text="Add Row", command=self.add_table_row)
+        # Creating a photoimage object to use image
+        img = tk.PhotoImage(file=r"Graphics/plus.png")
+        img = img.subsample(64)
+
+        button = tk.Button(button_frame, image=img, command=self.add_table_row)
+        button.image = img
         button.pack()
-        button_frame.pack()
+        button_frame.pack(side=tk.RIGHT)
 
         for i, text in enumerate(['Item', 'Rate', 'Quantity']):
             tk.Label(self.table_frame, text=text, font=('Arial', 12), padx=10, width=6).grid(row=0, column=i, padx=10)
@@ -114,22 +117,21 @@ class Module:
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, *args):
+    def generate(self, choice='PDF', *args):
         raise NotImplementedError
 
     def preview(self):
         self.generate()
-        if self.target_pdf:
-            os.remove(self.target_pdf)
+        if self.final_file_path:
+            os.remove(self.final_file_path)
 
     def clear(self, *args):
         raise NotImplementedError
 
-    def write(self, target, module_name, entries, hidden_entries):
+    def write(self, target, module_name, entries, hidden_entries, choice):
 
         # paths
-        template_path = os.path.abspath('../Templates.xlsx')
-        target_path = template_path[:-14] + target
+        target_path = self.template_path[:-14] + target
         try:
             # open excel
             app = client.DispatchEx("Excel.Application")
@@ -137,7 +139,7 @@ class Module:
             app.Visible = False
 
             # load template and open required sheet
-            Workbook = app.Workbooks.Open(template_path)
+            Workbook = app.Workbooks.Open(self.template_path)
             Workbook.WorkSheets(module_name).Select()
             Worksheet = Workbook.WorkSheets(module_name)
 
@@ -172,8 +174,15 @@ class Module:
             Worksheet.Shapes.AddPicture(logo_path, True, True, 0, 15, 60, 65)
 
             # Save as PDF AND Discard Changes to template
-            Workbook.SaveAs(target_path + '.pdf', FileFormat=57)
-            os.startfile(target_path + '.pdf')
+            if choice == 'PDF':
+                self.final_file_path = target_path + '.pdf'
+                Workbook.SaveAs(self.final_file_path, FileFormat=57)
+
+            elif choice == 'Excel':
+                self.final_file_path = target_path + '.xlsx'
+                Workbook.SaveAs(self.final_file_path)
+
+            os.startfile(self.final_file_path)
 
         except Exception as e:
             print("Failed to convert")

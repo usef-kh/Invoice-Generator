@@ -68,11 +68,16 @@ class InvoiceGenerator:
         self.menubar.add_cascade(label='File', menu=file_menubar)
 
         file_menubar.add_cascade(label='New... ', menu=new_menubar)
-
         file_menubar.add_command(label='Clear', command=self.clear)
         file_menubar.add_command(label='Preview', command=self.preview)
+        file_menubar.add_separator()
+        file_menubar.add_command(label='Save', command=self.generate)
 
-        file_menubar.add_command(label='Generate', command=self.generate)
+        save_as_menubar = tk.Menu(file_menubar, tearoff=False)
+        for option in ['PDF', 'Excel']:
+            save_as_menubar.add_command(label=option, command=lambda choice=option: self.generate(choice))
+
+        file_menubar.add_cascade(label='Save As...', menu=save_as_menubar)
 
         file_menubar.add_separator()
         file_menubar.add_command(label='Exit', command=self.root.destroy)
@@ -83,9 +88,9 @@ class InvoiceGenerator:
         if self.current_module:
             self.current_module.clear()
 
-    def generate(self):
+    def generate(self, choice='PDF'):
         if self.current_module:
-            self.current_module.generate()
+            self.current_module.generate(choice)
 
     def preview(self):
         if self.current_module:
