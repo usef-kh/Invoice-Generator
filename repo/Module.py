@@ -1,8 +1,11 @@
 import os
+import shutil
 import tkinter as tk
 from tkinter import ttk
 
+import openpyxl
 import pandas as pd
+from win32com import client
 
 
 class Module:
@@ -121,6 +124,64 @@ class Module:
 
     def clear(self, *args):
         raise NotImplementedError
+
+    def write(self, target, module_name, entries, hidden_entries):
+
+        # paths
+        template_path = os.path.abspath('../Templates.xlsx')
+        target_path = template_path[:-14] + target
+        try:
+            # open excel
+            app = client.DispatchEx("Excel.Application")
+            app.Interactive = False
+            app.Visible = False
+
+            # load template and open required sheet
+            Workbook = app.Workbooks.Open(template_path)
+            Workbook.WorkSheets(module_name).Select()
+            Worksheet = Workbook.WorkSheets(module_name)
+
+            conv = {
+                'A': 1,
+                'B': 2,
+                'C': 3,
+                'D': 4,
+                'E': 5,
+                'F': 6,
+                'G': 7,
+                'H': 8,
+                'I': 9,
+                'K': 10
+            }
+
+            # Place Information in cells
+            for cell, info in entries:
+                column, row = conv[cell[0]], cell[1:]
+                Worksheet.Cells(row, column).Value = info
+
+            for cell, info in hidden_entries:
+                column, row = conv[cell[0]], cell[1:]
+                if info != 0:
+                    Worksheet.Rows(row).Hidden = False
+                    Worksheet.Cells(row, column).Value = info
+                else:
+                    Worksheet.Rows(row).Hidden = True
+
+            # Insert Logo
+            logo_path = os.path.abspath("Graphics\logo.png")
+            Worksheet.Shapes.AddPicture(logo_path, True, True, 0, 15, 60, 65)
+
+            # Save as PDF AND Discard Changes to template
+            Workbook.SaveAs(target_path + '.pdf', FileFormat=57)
+            os.startfile(target_path + '.pdf')
+
+        except Exception as e:
+            print("Failed to convert")
+            print(str(e))
+
+        finally:
+            Workbook.Close(SaveChanges=False)
+            app = None
 
 
 if __name__ == '__main__':

@@ -1,14 +1,11 @@
 import os
-import shutil
 import tkinter as tk
 from datetime import datetime
 from tkinter import messagebox
 from tkinter import ttk
 
-import openpyxl
 from Module import Module
 from tkcalendar import DateEntry
-from win32com import client
 
 
 class MediaSpace(Module):
@@ -213,14 +210,9 @@ class MediaSpace(Module):
             messagebox.showinfo("Error", message=e)
             return
 
-        # Open Excel Sheet
-        template = os.path.abspath('../Templates.xlsx')
-        target = '../Invoices/MediaSpace/' + invoice_number + "_" + customer + '.xlsx'
+        target = 'Invoices/MediaSpace/' + invoice_number + "_" + customer
 
-        # Create duplicate of template
-        shutil.copyfile(template, target)
-
-        placements = {
+        cells = {
             'admin': 'A6',
             'name': 'A13',
             'company': 'A14',
@@ -234,79 +226,32 @@ class MediaSpace(Module):
             'notes': 'A48'
         }
 
-        workbook = openpyxl.load_workbook(target)
-        worksheet = workbook['MediaSpace']
-
-        # add image
-        img = openpyxl.drawing.image.Image('Graphics/logo.png')
-        img.width = 85
-        img.height = 85
-        img.anchor = 'A2'
-        worksheet.add_image(img)
-
         # place info
-        worksheet[placements['admin']] = admin
-        worksheet[placements['name']] = customer
-        worksheet[placements['company']] = company
+        entries = [(cells['admin'], admin),
+                   (cells['name'], customer),
+                   (cells['company'], company),
+                   (cells['invoice_date'], invoice_date),
+                   (cells['invoice_number'], invoice_number),
+                   (cells['due_date'], reservation_descriptions[0][0]),
+                   (cells['notes'], self.notes.get("1.0", 'end-1c'))]
 
-        if credit > 0:
-            worksheet[placements['credit']] = credit
-            worksheet.row_dimensions[int(placements['credit'][1:])].hidden = False
-        else:
-            worksheet.row_dimensions[int(placements['credit'][1:])].hidden = True
+        for placement, entry in zip(cells['table'], billables):
+            for cell, info in zip(placement, entry):
+                entries.append((cell, info))
 
-        if discount > 0:
-            worksheet[placements['discount']] = discount
-            worksheet.row_dimensions[int(placements['discount'][1:])].hidden = False
-        else:
-            worksheet.row_dimensions[int(placements['discount'][1:])].hidden = True
-
-        worksheet[placements['invoice_date']] = invoice_date
-        worksheet[placements['invoice_number']] = invoice_number
-        worksheet[placements['due_date']] = reservation_descriptions[0][0]
-
-        worksheet[placements['notes']] = self.notes.get("1.0", 'end-1c')
-
-        for i, entry in enumerate(zip(placements['reservation_details'], reservation_descriptions)):
+        for i, entry in enumerate(zip(cells['reservation_details'], reservation_descriptions)):
             placement, description = entry
             for cell, info in zip(placement, description):
-                worksheet[cell] = info
+                entries.append((cell, info))
 
-        for placement in placements['reservation_details'][i + 1:]:
-            row = placement[0][1:]
-            worksheet.row_dimensions[int(row)].hidden = True
+        hidden_entries = []
+        for cell1, cell2 in cells['reservation_details'][i + 1:]:
+            hidden_entries.append((cell1, 0))
 
-        for placement, entry in zip(placements['table'], billables):
-            for cell, info in zip(placement, entry):
-                worksheet[cell] = info
+        hidden_entries.append((cells['credit'], credit))
+        hidden_entries.append((cells['discount'], discount))
 
-        # Save Excel sheet
-        workbook.save(target)
-
-        # Convert to pdf
-        app = client.DispatchEx("Excel.Application")
-        app.Interactive = False
-        app.Visible = False
-        Workbook = app.Workbooks.Open(os.path.abspath(target))
-
-        filename, extension = os.path.abspath(target).split('.')
-        Workbook.WorkSheets('MediaSpace').Select()
-        try:
-            Workbook.ActiveSheet.ExportAsFixedFormat(0, filename + '.pdf')
-        except Exception as e:
-            print(
-                "Failed to convert in PDF format.Please confirm environment meets all the requirements  and try again")
-            print(str(e))
-        finally:
-            Workbook.Close()
-            # app.Exit()
-
-        # Delete excel version of invoice
-        self.target_xlsx = target
-        self.target_pdf = filename + '.pdf'
-        os.remove(self.target_xlsx)
-
-        os.startfile(self.target_pdf)
+        self.write(target, 'MediaSpace', entries, hidden_entries)
 
     def clear(self, *args):
         self.admin.delete(0, 'end')

@@ -9,7 +9,6 @@ mkl-random==1.1.1
 mkl-service==2.3.0
 numpy @ file:///C:/ci/numpy_and_numpy_base_1596215850360/work
 olefile==0.46
-openpyxl @ file:///tmp/build/80754af9/openpyxl_1598113097404/work
 pandas @ file:///C:/ci/pandas_1598371563714/work
 pefile==2019.4.18
 Pillow @ file:///C:/ci/pillow_1594298230227/work
@@ -23,6 +22,3 @@ six==1.15.0
 tkcalendar==1.6.1
 wincertstore==0.2
 xlrd==1.2.0
-
-openpyxl~=3.0.5
-pandas~=1.1.1
