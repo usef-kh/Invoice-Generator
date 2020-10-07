@@ -14,6 +14,7 @@ class Module:
 
         self.template_path = os.path.abspath('Templates.xlsx')
         self.final_file_path = None
+        self.module_name = None
 
         self.master = tk.LabelFrame(self.root, borderwidth=0, highlightthickness=0)
         self.master.pack()
@@ -117,18 +118,25 @@ class Module:
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, choice='PDF', *args):
+    def read_inputs(self, choice='PDF', *args):
         raise NotImplementedError
 
     def preview(self):
-        self.generate()
+        self.save()
         if self.final_file_path:
             os.remove(self.final_file_path)
 
     def clear(self, *args):
         raise NotImplementedError
 
-    def write(self, target, module_name, entries, hidden_entries, choice):
+    def save(self, choice='PDF'):
+
+        inputs = self.read_inputs()
+        if isinstance(inputs, Exception):
+            tk.messagebox.showinfo("Error", message=inputs)
+            return
+
+        target, entries, hidden_entries = inputs
 
         # paths
         target_path = self.template_path[:-14] + target
@@ -140,8 +148,8 @@ class Module:
 
             # load template and open required sheet
             Workbook = app.Workbooks.Open(self.template_path)
-            Workbook.WorkSheets(module_name).Select()
-            Worksheet = Workbook.WorkSheets(module_name)
+            Workbook.WorkSheets(self.module_name).Select()
+            Worksheet = Workbook.WorkSheets(self.module_name)
 
             conv = {
                 'A': 1,

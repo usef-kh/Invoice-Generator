@@ -13,7 +13,7 @@ class MediaSpace(Module):
     def __init__(self, root):
         super(MediaSpace, self).__init__(root)
         self.root.title("Invoice Generator - Media Space")
-        self.root.geometry('465x610')
+        self.root.geometry('460x610')
 
     def load_database(self):
         super(MediaSpace, self).load_database()
@@ -62,7 +62,7 @@ class MediaSpace(Module):
 
         self.reservation_details = dict()
         for i in range(3):
-            item_field = ttk.Combobox(frame, values=list(self.SPACES.index), width=25)
+            item_field = ttk.Combobox(frame, values=list(self.SPACES.index), width=22)
             item_field.grid(row=i + 1, column=0)
 
             date_field = DateEntry(frame, width=8, background='black', foreground='white', borderwidth=2)
@@ -88,7 +88,7 @@ class MediaSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, choice='PDF', *args):
+    def read_inputs(self, choice='PDF', *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str
@@ -226,8 +226,7 @@ class MediaSpace(Module):
                     raise Exception("Invalid rate used in item reservation")
 
         except Exception as e:
-            messagebox.showinfo("Error", message=e)
-            return
+            return e
 
         target = 'Invoices/MediaSpace/' + invoice_number + "_" + customer
 
@@ -270,7 +269,7 @@ class MediaSpace(Module):
         hidden_entries.append((cells['credit'], credit))
         hidden_entries.append((cells['discount'], discount))
 
-        self.write(target, 'MediaSpace', entries, hidden_entries, choice)
+        return target, entries, hidden_entries
 
     def clear(self, *args):
         self.admin.delete(0, 'end')

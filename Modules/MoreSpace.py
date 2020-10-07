@@ -13,6 +13,7 @@ class MoreSpace(Module):
     def __init__(self, root):
         super(MoreSpace, self).__init__(root)
         self.root.title("Invoice Generator - More Space")
+        self.module_name = 'MoreSpace'
         self.root.geometry('450x585')
 
     def load_database(self):
@@ -75,7 +76,7 @@ class MoreSpace(Module):
                                                                                                          column=2,
                                                                                                          padx=10)
 
-        self.discount = tk.Spinbox(detailsframe, from_=0, to=101, increment=5, wrap=True, width=4, justify=tk.LEFT)
+        self.discount = tk.Spinbox(detailsframe, from_=0, to=25, increment=5, wrap=True, width=4, justify=tk.LEFT)
         self.discount.grid(row=1, column=3, padx=10, sticky=tk.W)
         detailsframe.pack(anchor=tk.W)
 
@@ -89,7 +90,7 @@ class MoreSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def generate(self, choice='PDF', *args):
+    def read_inputs(self, choice='PDF', *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str
@@ -263,8 +264,7 @@ class MoreSpace(Module):
                     raise Exception("Invalid rate used in item reservation")
 
         except Exception as e:
-            messagebox.showinfo("Error", message=e)
-            return
+            return e
 
         target = 'Invoices/MoreSpace/' + invoice_number + "_" + customer
 
@@ -298,6 +298,8 @@ class MoreSpace(Module):
 
         hidden_entries = [(cells['credit'], credit),
                           (cells['discount'], discount)]
+
+        return [target, entries, hidden_entries]
 
         self.write(target, 'MoreSpace', entries, hidden_entries, choice)
 

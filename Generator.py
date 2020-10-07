@@ -11,17 +11,15 @@ class Generator:
         self.root.wm_iconbitmap('Graphics/logo.ico')
         self.modules = ["More Space", "Media Space", "Fabrication Services", "CNC Milling"]
 
-        self.create_menubar()
-
         self.current_frame = None
         self.current_module = None
 
         self.new()
+        self.create_menubar()
         self.root.mainloop()
 
     def new(self):
         if self.current_frame:
-            print('hi')
             self.current_frame.destroy()
             self.current_module = None
 
@@ -65,14 +63,13 @@ class Generator:
         new_menubar = tk.Menu(file_menubar, tearoff=False)
         for name in self.modules:
             new_menubar.add_command(label=name, command=lambda module=name: self.create(module))
-
+        self.menubar.add_command(label='Main Menu', command=self.new)
         self.menubar.add_cascade(label='File', menu=file_menubar)
-
         file_menubar.add_cascade(label='New... ', menu=new_menubar)
         file_menubar.add_command(label='Clear', command=self.clear)
         file_menubar.add_command(label='Preview', command=self.preview)
         file_menubar.add_separator()
-        file_menubar.add_command(label='Save', command=self.generate)
+        file_menubar.add_command(label='Save', command=self.save)
 
         save_as_menubar = tk.Menu(file_menubar, tearoff=False)
         for option in ['PDF', 'Excel']:
@@ -89,16 +86,19 @@ class Generator:
         if self.current_module:
             self.current_module.clear()
 
-    def generate(self, choice='PDF'):
+    def save(self, choice='PDF'):
         if self.current_module:
-            self.current_module.generate(choice)
+            self.current_module.save(choice)
 
     def preview(self):
         if self.current_module:
             self.current_module.preview()
 
     def change_mode(self):
-        pass
+
+        password_window = tk.Tk()
+        password_window.mainloop()
+        self.create('More Space')
 
 
 if __name__ == '__main__':
