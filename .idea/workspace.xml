@@ -20,11 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d6c7b55-e1b3-4f96-997c-d365a6e8d56f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Old Scripts/AnotherWindow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/Autocomplete.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/CustomCombobox.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/MoreSpace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/Old Invoice Generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/OldMoreSpace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/testteerrre.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Old Scripts/trietest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/Graphics/plus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/Templates.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/database.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Templates.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Templates.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Invoices/MediaSpace/00001_sedfw.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Invoices/MediaSpace/00002_YOusif.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Invoices/MediaSpace/00003_Yousif .pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Invoices/MediaSpace/00003_Yousif .xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/InvoiceGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/repo/InvoiceGenerator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/MediaSpace.py" beforeDir="false" afterPath="$PROJECT_DIR$/repo/MediaSpace.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/Module.py" beforeDir="false" afterPath="$PROJECT_DIR$/repo/Module.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/MoreSpace.py" beforeDir="false" afterPath="$PROJECT_DIR$/repo/MoreSpace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/AnotherWindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/Autocomplete.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/CustomCombobox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/MoreSpace.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/Old Invoice Generator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/OldMoreSpace.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/testteerrre.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/Old Scripts/trietest.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +60,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1iQqjquVZt15EHHrfgyYMaS8SJS" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -161,27 +189,30 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="-760" y="369" key="FileChooserDialogImpl" timestamp="1601917440621">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
     <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1601917440621" />
-    <state width="1059" height="651" key="GridCell.Tab.0.bottom" timestamp="1602043422362">
+    <state width="1059" height="651" key="GridCell.Tab.0.bottom" timestamp="1602047697545">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="651" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602043422362" />
-    <state width="1059" height="651" key="GridCell.Tab.0.center" timestamp="1602043422362">
+    <state width="1059" height="651" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602047697545" />
+    <state width="1059" height="651" key="GridCell.Tab.0.center" timestamp="1602047697545">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="651" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602043422362" />
-    <state width="1059" height="651" key="GridCell.Tab.0.left" timestamp="1602043422362">
+    <state width="1059" height="651" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602047697545" />
+    <state width="1059" height="651" key="GridCell.Tab.0.left" timestamp="1602047697545">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="651" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602043422362" />
-    <state width="1059" height="651" key="GridCell.Tab.0.right" timestamp="1602043422362">
+    <state width="1059" height="651" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602047697545" />
+    <state width="1059" height="651" key="GridCell.Tab.0.right" timestamp="1602047697545">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="651" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602043422362" />
+    <state width="1059" height="651" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602047697545" />
     <state width="1059" height="684" key="GridCell.Tab.1.bottom" timestamp="1602013958821">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
