@@ -28,7 +28,7 @@ number      text
 morespace_spaces = """
 CREATE TABLE IF NOT EXISTS morespace_spaces (
 code        text,
-decription  text,
+description  text,
 rate        real,
 unit        text
 )
@@ -83,5 +83,8 @@ tables = [customers,
           mediaspace_items,
           mediaspace_extras]
 
+
 for table in tables:
     create_table(table)
+
+

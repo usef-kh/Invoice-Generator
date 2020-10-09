@@ -73,7 +73,7 @@ class Generator:
 
         save_as_menubar = tk.Menu(file_menubar, tearoff=False)
         for option in ['PDF', 'Excel']:
-            save_as_menubar.add_command(label=option, command=lambda choice=option: self.generate(choice))
+            save_as_menubar.add_command(label=option, command=lambda choice=option: self.save(choice))
 
         file_menubar.add_cascade(label='Save As...', menu=save_as_menubar)
 
