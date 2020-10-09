@@ -65,10 +65,10 @@ class Module:
         button_frame = tk.LabelFrame(frame, width=10, font=('Arial', 14), borderwidth=0, highlightthickness=0)
 
         # Creating a photoimage object to use image
-        img = tk.PhotoImage(file=r"Graphics/plus.png")
+        img = tk.PhotoImage(file="Graphics/plus.png")
         img = img.subsample(64)
 
-        button = tk.Button(button_frame, image=img, command=self.add_table_row)
+        button = tk.Button(button_frame, image=img, command=self.add_table_row, borderwidth=0)
         button.image = img
         button.pack()
         button_frame.pack(side=tk.RIGHT)
@@ -118,7 +118,7 @@ class Module:
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def read_inputs(self, choice='PDF', *args):
+    def read_inputs(self, *args):
         raise NotImplementedError
 
     def preview(self):

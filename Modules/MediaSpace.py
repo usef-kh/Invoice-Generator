@@ -1,7 +1,6 @@
 import os
 import tkinter as tk
 from datetime import datetime, date
-from tkinter import messagebox
 from tkinter import ttk
 
 from tkcalendar import DateEntry
@@ -88,7 +87,7 @@ class MediaSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def read_inputs(self, choice='PDF', *args):
+    def read_inputs(self, *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str

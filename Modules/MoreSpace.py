@@ -1,7 +1,6 @@
 import os
 import tkinter as tk
 from datetime import datetime, date, timedelta
-from tkinter import messagebox
 
 from tkcalendar import DateEntry
 
@@ -90,7 +89,7 @@ class MoreSpace(Module):
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
-    def read_inputs(self, choice='PDF', *args):
+    def read_inputs(self, *args):
 
         def convert_to_num(str, isFloat=True):
             test_str = str
@@ -300,8 +299,6 @@ class MoreSpace(Module):
                           (cells['discount'], discount)]
 
         return [target, entries, hidden_entries]
-
-        self.write(target, 'MoreSpace', entries, hidden_entries, choice)
 
     def clear(self, *args):
         self.admin.delete(0, 'end')
