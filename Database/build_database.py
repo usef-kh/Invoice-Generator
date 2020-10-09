@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def make_connection(db='Database.db'):
     conn = sqlite3.connect(db)
     return conn
@@ -14,6 +15,15 @@ def create_table(command):
     conn.commit()
     conn.close()
 
+
+customers = """
+CREATE TABLE IF NOT EXISTS customers (
+name        text,
+company     text,
+email       text,
+number      text
+)
+"""
 
 morespace_spaces = """
 CREATE TABLE IF NOT EXISTS morespace_spaces (
@@ -65,7 +75,8 @@ unit        text
 )
 """
 
-tables = [morespace_spaces,
+tables = [customers,
+          morespace_spaces,
           morespace_items,
           morespace_extras,
           mediaspace_spaces,

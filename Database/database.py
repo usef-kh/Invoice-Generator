@@ -12,9 +12,11 @@ root = tk.Tk()
 main_tabs = ttk.Notebook(root)
 main_tabs.pack()
 
+customers_tab = ttk.Frame(main_tabs)
 morespace_tab = ttk.Frame(main_tabs)
 mediaspace_tab = ttk.Frame(main_tabs)
 
+main_tabs.add(customers_tab, text='Customers')
 main_tabs.add(morespace_tab, text='More Space')
 main_tabs.add(mediaspace_tab, text='Media Space')
 main_tabs.pack(expand=True, fill="both")
@@ -107,7 +109,7 @@ def load_database(frame, sheet):
     add_button = tk.Button(frame, text='Add Entry', command=submit)
     add_button.pack()
 
-
+load_database(customers_tab, 'customers')
 load_database(morespace_spaces_tab, 'morespace_spaces')
 load_database(morespace_items_tab, 'morespace_items')
 load_database(morespace_extras_tab, 'morespace_extras')
