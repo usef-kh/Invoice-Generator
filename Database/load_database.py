@@ -114,6 +114,7 @@ class MoreSpace(DatabaseModule):
         tabs = ttk.Notebook(root)
         tabs.pack(expand=True, fill="both")
 
+
         spaces_tab = ttk.Frame(tabs)
         items_tab = ttk.Frame(tabs)
         extras_tab = ttk.Frame(tabs)
@@ -123,10 +124,9 @@ class MoreSpace(DatabaseModule):
         tabs.add(extras_tab, text='Extras')
 
         # load sheets into tabs
-        all_tabs = [spaces_tab, items_tab, extras_tab]
         all_sheets = ['morespace_spaces', 'morespace_items', 'morespace_extras']
 
-        for tab, sheet in zip(all_tabs, all_sheets):
+        for tab, sheet in zip(tabs.children.values(), all_sheets):
             self.load_sheet(tab, sheet)
 
 
@@ -149,10 +149,9 @@ class MediaSpace(DatabaseModule):
         tabs.add(extras_tab, text='Extras')
 
         # load sheets into tabs
-        all_tabs = [spaces_tab, items_tab, extras_tab]
         all_sheets = ['mediaspace_spaces', 'mediaspace_items', 'mediaspace_extras']
 
-        for tab, sheet in zip(all_tabs, all_sheets):
+        for tab, sheet in zip(tabs.children.values(), all_sheets):
             self.load_sheet(tab, sheet)
 
 
