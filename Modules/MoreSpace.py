@@ -289,6 +289,7 @@ class MoreSpace(Module):
                    (cells['invoice_number'], invoice_number),
                    (cells['start_date'], reformat(self.start_date.get())),
                    (cells['end_date'], reformat(self.end_date.get())),
+                   (cells['due_date'], reformat(self.start_date.get())),
                    (cells['notes'], self.notes.get("1.0", 'end-1c'))]
 
         for placement, entry in zip(cells['table'], billables):

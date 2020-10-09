@@ -20,10 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d6c7b55-e1b3-4f96-997c-d365a6e8d56f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Database/load_database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/build_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/build_database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Module.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/MoreSpace.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/MoreSpace.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +53,9 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python-Inventory-" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.database">
+  <component name="RunManager" selected="Python.load_database">
     <configuration name="Generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Invoice Generator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -67,6 +69,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MoreSpace" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Invoice Generator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Modules/MoreSpace.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -117,16 +140,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="load_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Invoice Generator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database/load_database.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.build_database" />
       <item itemvalue="Python.Generator" />
       <item itemvalue="Python.database" />
+      <item itemvalue="Python.MoreSpace" />
+      <item itemvalue="Python.load_database" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.load_database" />
+        <item itemvalue="Python.Generator" />
+        <item itemvalue="Python.MoreSpace" />
         <item itemvalue="Python.database" />
         <item itemvalue="Python.build_database" />
-        <item itemvalue="Python.Generator" />
       </list>
     </recent_temporary>
   </component>
@@ -173,46 +221,46 @@
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
     <state x="-988" y="-234" width="896" height="1696" key="DiffContextDialog/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602098254729" />
-    <state x="-760" y="369" key="FileChooserDialogImpl" timestamp="1602173679567">
+    <state x="-760" y="369" key="FileChooserDialogImpl" timestamp="1602254582662">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602173679567" />
-    <state width="1059" height="322" key="GridCell.Tab.0.bottom" timestamp="1602220031047">
+    <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602254582662" />
+    <state width="1059" height="322" key="GridCell.Tab.0.bottom" timestamp="1602271313792">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="322" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602220031047" />
+    <state width="1059" height="322" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602271313792" />
     <state width="1899" height="277" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="322" key="GridCell.Tab.0.center" timestamp="1602220031047">
+    <state width="1059" height="322" key="GridCell.Tab.0.center" timestamp="1602271313792">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="322" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602220031047" />
+    <state width="1059" height="322" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602271313792" />
     <state width="1899" height="277" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="322" key="GridCell.Tab.0.left" timestamp="1602220031047">
+    <state width="1059" height="322" key="GridCell.Tab.0.left" timestamp="1602271313792">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="322" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602220031047" />
+    <state width="1059" height="322" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602271313792" />
     <state width="1899" height="277" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="322" key="GridCell.Tab.0.right" timestamp="1602220031047">
+    <state width="1059" height="322" key="GridCell.Tab.0.right" timestamp="1602271313792">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="322" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602220031047" />
+    <state width="1059" height="322" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602271313792" />
     <state width="1899" height="277" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="684" key="GridCell.Tab.1.bottom" timestamp="1602013958821">
+    <state width="1059" height="684" key="GridCell.Tab.1.bottom" timestamp="1602261613940">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="684" key="GridCell.Tab.1.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602013958821" />
-    <state width="1059" height="684" key="GridCell.Tab.1.center" timestamp="1602013958821">
+    <state width="1059" height="684" key="GridCell.Tab.1.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602261613940" />
+    <state width="1059" height="684" key="GridCell.Tab.1.center" timestamp="1602261613940">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="684" key="GridCell.Tab.1.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602013958821" />
-    <state width="1059" height="684" key="GridCell.Tab.1.left" timestamp="1602013958820">
+    <state width="1059" height="684" key="GridCell.Tab.1.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602261613940" />
+    <state width="1059" height="684" key="GridCell.Tab.1.left" timestamp="1602261613940">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="684" key="GridCell.Tab.1.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602013958820" />
-    <state width="1059" height="684" key="GridCell.Tab.1.right" timestamp="1602013958821">
+    <state width="1059" height="684" key="GridCell.Tab.1.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602261613940" />
+    <state width="1059" height="684" key="GridCell.Tab.1.right" timestamp="1602261613940">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="684" key="GridCell.Tab.1.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602013958821" />
+    <state width="1059" height="684" key="GridCell.Tab.1.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602261613940" />
     <state x="-693" y="527" key="VCS.ChangelistChooser" timestamp="1602098090271">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>

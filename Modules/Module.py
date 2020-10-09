@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import pandas as pd
 from win32com import client
@@ -133,7 +133,7 @@ class Module:
 
         inputs = self.read_inputs()
         if isinstance(inputs, Exception):
-            tk.messagebox.showinfo("Error", message=inputs)
+            messagebox.showinfo("Error", message=inputs)
             return
 
         target, entries, hidden_entries = inputs
@@ -171,7 +171,7 @@ class Module:
 
             for cell, info in hidden_entries:
                 column, row = conv[cell[0]], cell[1:]
-                if info != 0:
+                if info:
                     Worksheet.Rows(row).Hidden = False
                     Worksheet.Cells(row, column).Value = info
                 else:
