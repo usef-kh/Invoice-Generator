@@ -5,11 +5,9 @@ from tkinter import ttk, messagebox
 
 class DatabaseModule:
 
-    def __init__(self, root, db='Database.db'):
-        self.database_name = db
+    def __init__(self, root):
         self.root = root
-        self.conn = sqlite3.connect(db)
-        self.cursor = self.conn.cursor()
+
 
     def load_sheet(self, frame, sheet):
         def add():

@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d6c7b55-e1b3-4f96-997c-d365a6e8d56f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Database/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/load_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/load_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Inventory-Management-System" />
   </component>
-  <component name="RunManager" selected="Python.load_database">
+  <component name="RunManager" selected="Python.Sheet (1)">
     <configuration name="Generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Invoice Generator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,28 +74,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="MoreSpace" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Modules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Modules/MoreSpace.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="build_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Sheet (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Invoice Generator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -105,7 +86,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database/build_database.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database/Sheet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Sheet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Invoice Generator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\Yousef\Desktop\Projects\MakePlus\Invoice Generator\Database\Sheet.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,18 +160,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.Generator" />
-      <item itemvalue="Python.MoreSpace" />
-      <item itemvalue="Python.build_database" />
       <item itemvalue="Python.load_database" />
       <item itemvalue="Python.testCod" />
+      <item itemvalue="Python.Sheet" />
+      <item itemvalue="Python.Sheet (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Sheet (1)" />
+        <item itemvalue="Python.Sheet" />
         <item itemvalue="Python.load_database" />
         <item itemvalue="Python.testCod" />
         <item itemvalue="Python.Generator" />
-        <item itemvalue="Python.build_database" />
-        <item itemvalue="Python.MoreSpace" />
       </list>
     </recent_temporary>
   </component>
@@ -221,25 +223,25 @@
     </state>
     <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602475882615" />
     <state x="569" y="384" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602383914053" />
-    <state width="1059" height="699" key="GridCell.Tab.0.bottom" timestamp="1602478681316">
+    <state width="1037" height="699" key="GridCell.Tab.0.bottom" timestamp="1602481077877">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="699" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602478681316" />
+    <state width="1037" height="699" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602481077877" />
     <state width="1899" height="277" key="GridCell.Tab.0.bottom/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="699" key="GridCell.Tab.0.center" timestamp="1602478681316">
+    <state width="1037" height="699" key="GridCell.Tab.0.center" timestamp="1602481077877">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="699" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602478681316" />
+    <state width="1037" height="699" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602481077877" />
     <state width="1899" height="277" key="GridCell.Tab.0.center/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="699" key="GridCell.Tab.0.left" timestamp="1602478681316">
+    <state width="1037" height="699" key="GridCell.Tab.0.left" timestamp="1602481077877">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="699" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602478681316" />
+    <state width="1037" height="699" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602481077877" />
     <state width="1899" height="277" key="GridCell.Tab.0.left/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
-    <state width="1059" height="699" key="GridCell.Tab.0.right" timestamp="1602478681316">
+    <state width="1037" height="699" key="GridCell.Tab.0.right" timestamp="1602481077877">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state width="1059" height="699" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602478681316" />
+    <state width="1037" height="699" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602481077877" />
     <state width="1899" height="277" key="GridCell.Tab.0.right/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602088186467" />
     <state width="1059" height="684" key="GridCell.Tab.1.bottom" timestamp="1602357448901">
       <screen x="-1080" y="-326" width="1080" height="1880" />
