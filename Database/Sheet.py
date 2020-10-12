@@ -116,6 +116,9 @@ class GUISheet(Sheet):
                     # delete from tree
                     self.tree.delete(selection)
 
+    def edit(self):
+        pass
+
     def run(self):
         self.master.mainloop()
 
