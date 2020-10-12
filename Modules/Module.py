@@ -25,7 +25,7 @@ class Module:
         self.root.mainloop()
 
     def load_database(self):
-        self.database = pd.read_excel("database.xlsx", sheet_name=None, index_col=None)
+        raise NotImplementedError
 
     def build_window(self):
         raise NotImplementedError
@@ -88,12 +88,16 @@ class Module:
             choice = event.widget.get()
 
             table_entry[0].delete(0, "end")
-            table_entry[0].insert(0, self.ITEMS['Rate'][choice])
+            table_entry[0].insert(0, self.all_items[choice][0])
 
             table_entry[1].delete(0, "end")
             table_entry[1].insert(0, 1)
 
-        item_field = ttk.Combobox(self.table_frame, values=list(self.ITEMS.index), font=('Arial', 9), width=25)
+        self.all_items = {}
+        for row in self.ITEMS.get_table():
+            self.all_items[row[0]] = row[1:]
+
+        item_field = ttk.Combobox(self.table_frame, values=list(self.all_items.keys()), font=('Arial', 9), width=25)
         item_field.grid(row=self.counter, column=0, sticky="NSEW")
 
         item_field.bind("<<ComboboxSelected>>", set_rate)

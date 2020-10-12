@@ -1,5 +1,4 @@
 import os
-import sqlite3
 import tkinter as tk
 from tkinter import ttk, messagebox
 
@@ -14,21 +13,19 @@ class Module:
         self.root.wm_iconbitmap('Graphics/logo.ico')
 
         self.template_path = os.path.abspath('Templates.xlsx')
-        self.final_file_path = ''
-        self.module_name = ''
+        self.final_file_path = None
+        self.module_name = None
 
         self.master = tk.LabelFrame(self.root, borderwidth=0, highlightthickness=0)
         self.master.pack()
-
-        self.conn = sqlite3.connect("Database/Database.db")
-        self.cursor = self.conn.cursor()
+        self.load_database()
+        self.build_window()
 
     def start(self):
-        self.build_window()
         self.root.mainloop()
 
-    def load_sheets(self):
-        raise NotImplementedError
+    def load_database(self):
+        self.database = pd.read_excel("database.xlsx", sheet_name=None, index_col=None)
 
     def build_window(self):
         raise NotImplementedError
@@ -79,12 +76,6 @@ class Module:
         for i, text in enumerate(['Item', 'Rate', 'Quantity']):
             tk.Label(self.table_frame, text=text, font=('Arial', 12), padx=10, width=6).grid(row=0, column=i, padx=10)
 
-        records = self.cursor.execute("select * from " + self.module_name.lower() + "_items")
-
-        self.items = {}
-        for record in list(records):
-            self.items[record[0]] = record[1:]
-
         self.counter = 1
         self.table_fields = dict()
         self.add_table_row()
@@ -96,15 +87,13 @@ class Module:
             table_entry = self.table_fields[event.widget]
             choice = event.widget.get()
 
-            rate = self.items[choice][0]
-
             table_entry[0].delete(0, "end")
-            table_entry[0].insert(0, rate)
+            table_entry[0].insert(0, self.ITEMS['Rate'][choice])
 
             table_entry[1].delete(0, "end")
             table_entry[1].insert(0, 1)
 
-        item_field = ttk.Combobox(self.table_frame, values=list(self.items.keys()), font=('Arial', 9), width=25)
+        item_field = ttk.Combobox(self.table_frame, values=list(self.ITEMS.index), font=('Arial', 9), width=25)
         item_field.grid(row=self.counter, column=0, sticky="NSEW")
 
         item_field.bind("<<ComboboxSelected>>", set_rate)
@@ -118,6 +107,8 @@ class Module:
 
         self.counter += 1
         self.root.geometry(str(self.root.winfo_width()) + 'x' + str(self.root.winfo_height() + 20))
+
+        # print(self.root.winfo_height())
 
     def place_notes(self):
         frame = tk.LabelFrame(self.master, text='Notes', font=('Arial', 14), padx=10, pady=10, borderwidth=0,

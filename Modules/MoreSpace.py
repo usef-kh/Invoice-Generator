@@ -4,6 +4,7 @@ from datetime import datetime, date, timedelta
 
 from tkcalendar import DateEntry
 
+from Database.Sheet import Sheet
 from Modules.Module import Module
 
 
@@ -16,12 +17,9 @@ class MoreSpace(Module):
         self.root.geometry('450x585')
 
     def load_database(self):
-        super(MoreSpace, self).load_database()
-        self.SPACES = self.database['MoreSpace Spaces']
-        self.SPACES.set_index('Display Name', inplace=True)
-
-        self.ITEMS = self.database['MoreSpace Items']
-        self.ITEMS.set_index('Item', inplace=True)
+        self.SPACES = Sheet('morespace_spaces')
+        self.ITEMS = Sheet('morespace_items')
+        self.EXTRAS = Sheet('morespace_extras')
 
     def build_window(self):
         super(MoreSpace, self).place_admin_fields()
@@ -35,49 +33,55 @@ class MoreSpace(Module):
         frame = tk.LabelFrame(self.master, text='Space Reservation', font=('Arial', 14), padx=10, pady=10,
                               borderwidth=0, highlightthickness=0)
 
-        spacesframe = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
-        self.boxes = [(name, tk.IntVar()) for name in self.SPACES.index]
-        for i, box in enumerate(self.boxes):
+        spaces_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
+
+        codes = [record[0] for record in self.SPACES.get_table()]
+
+        self.space_reservation = [(code, tk.IntVar()) for code in codes]
+        self.tools_reservation = ('Tools', tk.IntVar())
+        for i, box in enumerate(self.space_reservation + [self.tools_reservation]):
             name, space = box
-            checkbox = tk.Checkbutton(spacesframe, text=name, variable=space)
+            checkbox = tk.Checkbutton(spaces_frame, text=name, variable=space)
             checkbox.pack(side=tk.LEFT)
-        spacesframe.pack(padx=20, anchor=tk.W)
 
-        datesframe = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
-        tk.Label(datesframe, text='Dates', font=('Arial', 10), padx=10, width=5, anchor=tk.W).grid(row=0, column=0)
+        spaces_frame.pack(padx=20, anchor=tk.W)
 
-        self.start_date = DateEntry(datesframe, width=8, background='black', foreground='white', borderwidth=2)
+        dates_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
+        tk.Label(dates_frame, text='Dates', font=('Arial', 10), padx=10, width=5, anchor=tk.W).grid(row=0, column=0)
+
+        self.start_date = DateEntry(dates_frame, width=8, background='black', foreground='white', borderwidth=2)
         self.start_date.grid(row=0, column=1, padx=9)
 
-        self.end_date = DateEntry(datesframe, width=8, background='black', foreground='white', borderwidth=2)
+        self.end_date = DateEntry(dates_frame, width=8, background='black', foreground='white', borderwidth=2)
         self.end_date.grid(row=0, column=2, padx=9)
-        datesframe.pack(padx=10, pady=5, anchor=tk.W)
+        dates_frame.pack(padx=10, pady=5, anchor=tk.W)
 
-        detailsframe = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
+        details_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
 
         entries = []
         for i, text in enumerate(['Tool Exclusions', 'Day Exclusions']):
-            tk.Label(detailsframe, text=text, font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(row=i, column=0,
-                                                                                                       padx=10)
-            entry = tk.Spinbox(detailsframe, from_=0, to=100, wrap=True, width=4, justify=tk.LEFT)
+            tk.Label(details_frame, text=text, font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(row=i, column=0,
+                                                                                                        padx=10)
+            entry = tk.Spinbox(details_frame, from_=0, to=100, wrap=True, width=4, justify=tk.LEFT)
             entry.grid(row=i, column=1, padx=10, sticky=tk.W)
             entries.append(entry)
 
         self.tool_exclusions, self.day_exclusions = entries
 
-        tk.Label(detailsframe, text='Additional Makers', font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(row=0,
-                                                                                                                  column=2,
-                                                                                                                  padx=10)
-        self.additional_makers = tk.Spinbox(detailsframe, from_=0, to=100, wrap=True, width=4, justify=tk.LEFT)
+        tk.Label(details_frame, text='Additional Makers', font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(
+            row=0,
+            column=2,
+            padx=10)
+        self.additional_makers = tk.Spinbox(details_frame, from_=0, to=100, wrap=True, width=4, justify=tk.LEFT)
         self.additional_makers.grid(row=0, column=3, padx=10, sticky=tk.W)
 
-        tk.Label(detailsframe, text='Discount', font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(row=1,
-                                                                                                         column=2,
-                                                                                                         padx=10)
+        tk.Label(details_frame, text='Discount', font=('Arial', 10), padx=10, width=12, anchor=tk.W).grid(row=1,
+                                                                                                          column=2,
+                                                                                                          padx=10)
 
-        self.discount = tk.Spinbox(detailsframe, from_=0, to=25, increment=5, wrap=True, width=4, justify=tk.LEFT)
+        self.discount = tk.Spinbox(details_frame, from_=0, to=25, increment=5, wrap=True, width=4, justify=tk.LEFT)
         self.discount.grid(row=1, column=3, padx=10, sticky=tk.W)
-        detailsframe.pack(anchor=tk.W)
+        details_frame.pack(anchor=tk.W)
 
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
@@ -161,25 +165,19 @@ class MoreSpace(Module):
         num_of_billable_days = num_of_days - day_exclusions
 
         booked_spaces = []
-        for box_name, checkbox in self.boxes[:-1]:  # Only Spaces
+        for box_name, checkbox in self.space_reservation:  # Only Spaces
             if checkbox.get():
-                name = self.SPACES['Space'][box_name]
-                unit = self.SPACES['Unit'][box_name]
-                rate = float(self.SPACES['Rate'][box_name])
-
-                booked_spaces += [(name, num_of_billable_days, unit, rate)]
+                _, description, rate, unit = self.SPACES.index(['code'], [box_name])
+                booked_spaces += [(description, num_of_billable_days, unit, float(rate))]
 
         billables = [space for space in booked_spaces]
         num_of_billable_tool_days = 0
-        if self.boxes[-1][-1].get():
-            box_name = self.boxes[-1][0]
+        if self.tools_reservation[1].get():     # Tools
             num_of_billable_tool_days = num_of_billable_days - tool_exclusions
 
-            name = self.SPACES['Space'][box_name]
-            unit = self.SPACES['Unit'][box_name]
-            rate = float(self.SPACES['Rate'][box_name])
+            item, rate, unit = self.EXTRAS.index(['item'], ['Tool Access'])
 
-            billables += [(name, num_of_billable_tool_days, unit, rate)]
+            billables += [(item, num_of_billable_tool_days, unit, float(rate))]
 
         if additional_makers > 0:
             unit = 'People'
@@ -187,7 +185,9 @@ class MoreSpace(Module):
             if additional_makers == 1:
                 unit = 'Person'
 
-            billables += [("Additional Maker(s)", additional_makers, unit, 10)]
+            item, rate, _ = self.EXTRAS.index(['item'], ['Additional Maker(s)'])
+
+            billables += [(item, additional_makers, unit, float(rate))]
 
         reserved_items = []
         for item, info in self.table_fields.items():
@@ -202,8 +202,8 @@ class MoreSpace(Module):
                     raise Exception("Invalid rate or quanitity used")
 
                 name = item.get()
-                if name in self.ITEMS.index:
-                    unit = self.ITEMS['Unit'][name]
+                if name in self.all_items:
+                    unit = self.all_items[name][1]
                 else:
                     unit = 'Item'
 
@@ -253,7 +253,7 @@ class MoreSpace(Module):
             if num_of_billable_tool_days < 0:
                 raise Exception("Too many tool Exclusions")
 
-            elif not self.boxes[-1][-1].get() and num_of_billable_tool_days > 0:
+            elif not self.tools_reservation[1].get() and num_of_billable_tool_days > 0:
                 raise Exception("Tool exclusion with no tools!")
 
             for name, qty, unit, rate in reserved_items:
@@ -312,7 +312,7 @@ class MoreSpace(Module):
 
         self.credit.delete(0, 'end')
 
-        for name, space in self.boxes:
+        for name, space in self.space_reservation:
             space.set(0)
 
         self.additional_makers.delete(0, 'end')
