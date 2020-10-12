@@ -41,9 +41,30 @@ class Sheet:
         self.cursor.execute(command)
         self.conn.commit()
 
-    def edit(self):
-        pass
+    def edit(self, old_record, new_record):
 
+        oid = self.get_oid(old_record)
+
+        for i, column in enumerate(self.columns):
+            old_value = old_record[i]
+            new_value = new_record[i]
+
+            if old_value != new_value:
+                query = "update " + self.sheet_name + " set " + column + " = ? where oid = ?"
+                data = (new_value, oid)
+                self.cursor.execute(query, data)
+
+        self.conn.commit()
+
+    def get_oid(self, record):
+        command = "select oid from " + self.sheet_name + " where "
+        for col, val in zip(self.columns[:-1], record[:-1]):
+            command += col + "=\"" + str(val) + "\" AND "
+        command += self.columns[-1] + "=\"" + str(record[-1]) + "\""
+
+        results = list(self.cursor.execute(command))
+
+        return results[0][0]
 
 class GUISheet(Sheet):
 
@@ -117,7 +138,47 @@ class GUISheet(Sheet):
                     self.tree.delete(selection)
 
     def edit(self):
-        pass
+        def submit():
+            new_record = []
+            for entry in entries:
+                new_record.append(entry.get())
+
+            super(GUISheet, self).edit(old_record, new_record)
+            window.destroy()
+
+            self.tree.delete(self.tree.selection()[0])
+            # Insert into tree
+            self.tree.insert('', tk.END, value=new_record)
+
+
+        if self.tree.selection():
+
+            if len(self.tree.selection()) > 1:
+                messagebox.showinfo("Error", message="You can only update one entry at a time")
+                return
+
+            old_record = self.tree.item(self.tree.selection()[0])['values']
+
+            window = tk.Tk()
+            info_frame = ttk.Frame(window)
+            button_frame = ttk.Frame(window)
+
+            info_frame.pack(padx=20, pady=(20, 0))
+            button_frame.pack(anchor=tk.E, padx=20, pady=(0, 20))
+
+            entries = []
+            for i, txt in enumerate(self.columns):
+                tk.Label(info_frame, text=txt, font=('Arial', 10), anchor=tk.W).grid(row=i + 1, column=0, padx=10,
+                                                                                     sticky=tk.W)
+                entry = ttk.Entry(info_frame, width=30)
+                entry.grid(row=i + 1, column=1, padx=10)
+                entries.append(entry)
+
+            for entry, value in zip(entries, old_record):
+                entry.insert(0, value)
+
+            submit_button = ttk.Button(button_frame, text="Submit", command=submit)
+            submit_button.pack(side=tk.RIGHT, padx=10, pady=(10, 0))
 
     def run(self):
         self.master.mainloop()
@@ -126,3 +187,8 @@ class GUISheet(Sheet):
 if __name__ == '__main__':
     sheet = GUISheet('morespace_spaces', tk.Tk())
     sheet.run()
+    # sheet = Sheet('morespace_spaces')
+    # sheet.edit(('C', "More Space 10'x15' - Space C", 25.0, 'Day(s)'), ('C', "More Space 10'x15' - Space C", 250.0, 'Day(s)'))
+    #
+    # for i in sheet.get_table():
+    #     print(i)
