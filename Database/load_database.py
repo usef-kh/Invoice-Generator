@@ -29,32 +29,36 @@ class DatabaseModule:
                 command = "INSERT INTO " + sheet + " VALUES(" + string + ")"
                 c.execute(command, placements)
 
+                # Insert into tree
+                tree.insert('', tk.END, value=list(placements.values()))
+
                 # Commit Changes
                 conn.commit()
+                c.close()
 
-                select = c.execute("SELECT oid, * FROM " + sheet + " order by oid")
-                select = list(select)
-                tree.insert('', tk.END, value=select[-1])
-                conn.close()
-
+                # Clear entry fields
                 for entry in entries:
                     entry.delete(0, tk.END)
 
             window = tk.Tk()
-            entries = []
-            for i, txt in enumerate(columns[1:]):
-                tk.Label(window, text=txt, font=('Arial', 10), padx=10, anchor=tk.W).grid(row=i + 1, column=0,
-                                                                                          padx=10)
-                entry = tk.Entry(window, fg="black", bg="white", width=30)
-                entry.grid(row=i + 1, column=1, padx=10)
+            info_frame = ttk.Frame(window)
+            button_frame = ttk.Frame(window)
 
+            info_frame.pack(padx=20, pady=(20, 0))
+            button_frame.pack(anchor=tk.E, padx=20, pady=(0, 20))
+
+            entries = []
+            for i, txt in enumerate(columns):
+                tk.Label(info_frame, text=txt, font=('Arial', 10), anchor=tk.W).grid(row=i + 1, column=0, padx=10,
+                                                                                     sticky=tk.W)
+                entry = ttk.Entry(info_frame, width=30)
+                entry.grid(row=i + 1, column=1, padx=10)
                 entries.append(entry)
 
-            submit_button = tk.Button(window, text="Submit", command=submit)
-            submit_button.grid(row=i + 2, column=0, columnspan=2)
+            submit_button = ttk.Button(button_frame, text="Submit", command=submit)
+            submit_button.pack(side=tk.RIGHT, padx=10, pady=(10, 0))
 
         def delete():
-
             if tree.selection():
                 check = messagebox.askquestion("Confirm", message="Are you sure you want to delete selection?")
 
@@ -64,16 +68,75 @@ class DatabaseModule:
 
                     for selection in tree.selection():
                         record = tree.item(selection)['values']
-                        key = record[0]
-                        c.execute("delete from " + sheet + " where oid =" + str(key))
 
+                        command = "delete from " + sheet + " where "
+                        for col, val in zip(columns[:-1], record[:-1]):
+                            command += col + "=\"" + str(val) + "\" AND "
+                        command += columns[-1] + "=\"" + str(record[-1]) + "\""
+
+                        c.execute(command)
                         tree.delete(selection)
 
                     conn.commit()
+                    c.close()
+
+        def edit():
+            def submit():
+
+                conn = sqlite3.connect('Database.db')
+                c = conn.cursor()
+
+                query = "select *  from " + sheet + " where oid =" + str(key)
+                record = c.execute(query)
+                record = list(record)[0]
+
+                for i, column in enumerate(c.description):
+                    column_name = column[0]
+
+                    new_value = entries[i].get()
+                    old_value = record[i]
+
+                    if old_value != new_value:
+                        query = "update " + sheet + " set " + column_name + " = ? where oid = ?"
+                        data = (new_value, key)
+                        c.execute(query, data)
+
+                conn.commit()
+                c.close()
+
+            if tree.selection():
+
+                if len(tree.selection()) > 1:
+                    messagebox.showinfo("Error", message="You can only update one entry at a time")
+                    return
+
+                record = tree.item(tree.selection()[0])['values']
+
+                key = record[0]
+
+                window = tk.Tk()
+                info_frame = ttk.Frame(window)
+                button_frame = ttk.Frame(window)
+
+                info_frame.pack(padx=20, pady=(20, 0))
+                button_frame.pack(anchor=tk.E, padx=20, pady=(0, 20))
+
+                entries = []
+                for i, txt in enumerate(columns):
+                    tk.Label(info_frame, text=txt, font=('Arial', 10), anchor=tk.W).grid(row=i + 1, column=0, padx=10, sticky=tk.W)
+                    entry = ttk.Entry(info_frame, width=30)
+                    entry.grid(row=i + 1, column=1, padx=10)
+                    entries.append(entry)
+
+                for entry, value in zip(entries, record):
+                    entry.insert(0, value)
+
+                submit_button = ttk.Button(button_frame, text="Submit", command=submit)
+                submit_button.pack(side=tk.RIGHT, padx=10, pady = (10, 0))
 
         conn = sqlite3.connect(self.database_name)
         c = conn.cursor()
-        records = c.execute("select oid, * from " + sheet)
+        records = c.execute("select * from " + sheet)
 
         columns = [description[0] for description in c.description]
 
@@ -89,11 +152,13 @@ class DatabaseModule:
         for entry in records:
             tree.insert('', tk.END, value=entry)
 
-        delete_button = tk.Button(frame, text='Delete', command=delete)
-        add_button = tk.Button(frame, text='Add Entry', command=add)
-        delete_button.pack(side=tk.LEFT, padx=10)
-        add_button.pack(side=tk.RIGHT, padx=10)
+        add_button = ttk.Button(frame, text='Add Entry', command=add)
+        edit_button = ttk.Button(frame, text='Edit', command=edit)
+        delete_button = ttk.Button(frame, text='Delete', command=delete)
 
+        add_button.pack(side=tk.RIGHT, padx=10)
+        edit_button.pack(side=tk.RIGHT, padx=10)
+        delete_button.pack(side=tk.RIGHT, padx=10)
 
 class Customers(DatabaseModule):
 
@@ -113,7 +178,6 @@ class MoreSpace(DatabaseModule):
         # create tabs
         tabs = ttk.Notebook(root)
         tabs.pack(expand=True, fill="both")
-
 
         spaces_tab = ttk.Frame(tabs)
         items_tab = ttk.Frame(tabs)
