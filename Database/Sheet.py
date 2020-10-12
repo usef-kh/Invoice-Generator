@@ -66,6 +66,7 @@ class Sheet:
 
         return results[0][0]
 
+
 class GUISheet(Sheet):
 
     def __init__(self, sheet_name, master):
@@ -146,13 +147,12 @@ class GUISheet(Sheet):
             super(GUISheet, self).edit(old_record, new_record)
             window.destroy()
 
+            # Change entry in tree
+            index = int(self.tree.selection()[0][1:]) - 1
             self.tree.delete(self.tree.selection()[0])
-            # Insert into tree
-            self.tree.insert('', tk.END, value=new_record)
-
+            self.tree.insert('', index, value=new_record)
 
         if self.tree.selection():
-
             if len(self.tree.selection()) > 1:
                 messagebox.showinfo("Error", message="You can only update one entry at a time")
                 return
@@ -187,6 +187,7 @@ class GUISheet(Sheet):
 if __name__ == '__main__':
     sheet = GUISheet('morespace_spaces', tk.Tk())
     sheet.run()
+
     # sheet = Sheet('morespace_spaces')
     # sheet.edit(('C', "More Space 10'x15' - Space C", 25.0, 'Day(s)'), ('C', "More Space 10'x15' - Space C", 250.0, 'Day(s)'))
     #
