@@ -83,7 +83,7 @@ class Sheet:
 
 class GUISheet(Sheet):
 
-    def __init__(self, sheet_name, master, db='Database/Database.db'):
+    def __init__(self, sheet_name, master, db='Database.db'):
         super(GUISheet, self).__init__(sheet_name, db)
 
         self.master = master
