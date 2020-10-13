@@ -37,7 +37,7 @@ class MoreSpace(Module):
 
         codes = [record[0] for record in self.SPACES.get_table()]
 
-        self.space_reservation = [(code, tk.IntVar()) for code in codes]
+        self.space_reservation = [(code, tk.IntVar()) for code in sorted(codes)]
         self.tools_reservation = ('Tools', tk.IntVar())
         for i, box in enumerate(self.space_reservation + [self.tools_reservation]):
             name, space = box
@@ -167,7 +167,7 @@ class MoreSpace(Module):
         booked_spaces = []
         for box_name, checkbox in self.space_reservation:  # Only Spaces
             if checkbox.get():
-                _, description, rate, unit = self.SPACES.index(['code'], [box_name])
+                _, description, rate, unit = self.SPACES.index('code', box_name)
                 booked_spaces += [(description, num_of_billable_days, unit, float(rate))]
 
         billables = [space for space in booked_spaces]
@@ -175,7 +175,7 @@ class MoreSpace(Module):
         if self.tools_reservation[1].get():     # Tools
             num_of_billable_tool_days = num_of_billable_days - tool_exclusions
 
-            item, rate, unit = self.EXTRAS.index(['item'], ['Tool Access'])
+            item, rate, unit = self.EXTRAS.index('item', "Tool Access")
 
             billables += [(item, num_of_billable_tool_days, unit, float(rate))]
 
@@ -185,9 +185,8 @@ class MoreSpace(Module):
             if additional_makers == 1:
                 unit = 'Person'
 
-            item, rate, _ = self.EXTRAS.index(['item'], ['Additional Maker(s)'])
-
-            billables += [(item, additional_makers, unit, float(rate))]
+            rate = self.EXTRAS.index('item', "Additional Maker(s)", 'rate')
+            billables += [("Additional Maker(s)", additional_makers, unit, float(rate))]
 
         reserved_items = []
         for item, info in self.table_fields.items():
@@ -202,9 +201,8 @@ class MoreSpace(Module):
                     raise Exception("Invalid rate or quanitity used")
 
                 name = item.get()
-                if name in self.all_items:
-                    unit = self.all_items[name][1]
-                else:
+                unit = self.ITEMS.index('item', name, 'unit')
+                if not unit:
                     unit = 'Item'
 
                 reserved_items += [(name, qty, unit, rate)]

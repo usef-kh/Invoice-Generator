@@ -1,21 +1,26 @@
 import tkinter as tk
+from tkinter import ttk
 
 from Modules.MediaSpace import MediaSpace
 from Modules.MoreSpace import MoreSpace
 
+from Database.Database import Database
 
 class Generator:
 
     def __init__(self):
         self.root = tk.Tk()
+
+
         self.root.wm_iconbitmap('Graphics/logo.ico')
-        self.modules = ["More Space", "Media Space", "Fabrication Services", "CNC Milling"]
+        self.modules = ["More Space", "Media Space", "Fabrication Services", "CNC Milling", "Database"]
 
         self.current_frame = None
         self.current_module = None
 
         self.new()
         self.create_menubar()
+        self.root.geometry('300x295')
         self.root.mainloop()
 
     def new(self):
@@ -31,7 +36,7 @@ class Generator:
         tk.Label(self.current_frame, text='Invoice Generator', font=('Arial', 14)).pack(pady=20)
 
         for name in self.modules:
-            button = tk.Button(self.current_frame, text=name, width=20, command=lambda module=name: self.create(module))
+            button = ttk.Button(self.current_frame, text=name, width=25, command=lambda module=name: self.create(module))
             button.pack(pady=5)
 
         self.current_frame.pack()
@@ -43,7 +48,8 @@ class Generator:
         modules = {'More Space': MoreSpace,
                    'Media Space': MediaSpace,
                    'Fabrication Services': MoreSpace,
-                   'CNC Milling': MoreSpace}
+                   'CNC Milling': MoreSpace,
+                    'Database': Database}
 
         module = modules[module_name]
 
@@ -52,6 +58,8 @@ class Generator:
         self.current_frame = self.current_module.master
 
         my_module.start()
+
+
 
     def create_menubar(self):
 

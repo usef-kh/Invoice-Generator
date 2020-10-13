@@ -5,6 +5,7 @@ from tkinter import ttk
 
 from tkcalendar import DateEntry
 
+from Database.Sheet import Sheet
 from Modules.Module import Module
 
 
@@ -12,15 +13,13 @@ class MediaSpace(Module):
     def __init__(self, root):
         super(MediaSpace, self).__init__(root)
         self.root.title("Invoice Generator - Media Space")
+        self.module_name = 'MediaSpace'
         self.root.geometry('460x610')
 
     def load_database(self):
-        super(MediaSpace, self).load_database()
-        self.SPACES = self.database['Media Spaces']
-        self.SPACES.set_index('Space', inplace=True)
-
-        self.ITEMS = self.database['Media Items']
-        self.ITEMS.set_index('Item', inplace=True)
+        self.SPACES = Sheet('mediaspace_spaces')
+        self.ITEMS = Sheet('mediaspace_items')
+        self.EXTRAS = Sheet('mediaspace_extras')
 
     def build_window(self):
         super(MediaSpace, self).place_admin_fields()
@@ -59,9 +58,11 @@ class MediaSpace(Module):
             options.append(str_num + ':' + '00 pm')
             options.append(str_num + ':' + '30 pm')
 
+        spaces = [record[0] for record in self.SPACES.get_table()]
+
         self.reservation_details = dict()
         for i in range(3):
-            item_field = ttk.Combobox(frame, values=list(self.SPACES.index), width=22)
+            item_field = ttk.Combobox(frame, values=spaces, width=22)
             item_field.grid(row=i + 1, column=0)
 
             date_field = DateEntry(frame, width=8, background='black', foreground='white', borderwidth=2)
@@ -162,22 +163,22 @@ class MediaSpace(Module):
                 duration = end_hr - start_hr + end_min / 60 - start_min / 60
                 time = start + ' - ' + end
 
+                # Extract quantities
+                _, weekday_rate, weekend_rate, unit = self.SPACES.index('space', name)
+
                 # Choose rate based on weekday
                 display_name = name
                 dt = date(*separate(_date.get()))
-                if dt.weekday() == days['sun']:
-                    space_rate = 'Weekend Rate'
+                if dt.weekday() == days['sun'] or dt.weekday() == days['sat']:
+                    rate = weekend_rate
                     display_name = name + ' - Weekend'
                 else:
-                    space_rate = 'Weekday Rate'
+                    rate = weekday_rate
 
-                # Extract quantities
-                rate = float(self.SPACES[space_rate][name])
-                unit = self.SPACES['Unit'][name]
                 booking_date = reformat(_date.get())
 
                 # Save info
-                billables += [(display_name, duration, unit, rate)]
+                billables += [(display_name, duration, unit, float(rate))]
                 reservation_descriptions += [(booking_date, time)]
 
         reserved_items = []
@@ -193,9 +194,8 @@ class MediaSpace(Module):
                     raise Exception("Invalid rate or quanitity used")
 
                 name = item.get()
-                if name in self.ITEMS.index:
-                    unit = self.ITEMS['Unit'][name]
-                else:
+                unit = self.ITEMS.index('item', name, 'unit')
+                if not unit:
                     unit = 'Item'
 
                 reserved_items += [(name, qty, unit, rate)]

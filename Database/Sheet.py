@@ -5,7 +5,7 @@ from tkinter import ttk, messagebox
 
 class Sheet:
 
-    def __init__(self, sheet_name='', db='Database/Database.db'):
+    def __init__(self, sheet_name='', db='Database.db'):
         self.conn = sqlite3.connect(db)
         self.cursor = self.conn.cursor()
 
@@ -66,13 +66,19 @@ class Sheet:
 
         return results[0][0]
 
-    def index(self, columns, values):
-        command = "select * from " + self.sheet_name + " where "
-        for col, val in zip(columns[:-1], values[:-1]):
-            command += col + "=\"" + str(val) + "\" AND "
-        command += columns[-1] + "=\"" + str(values[-1]) + "\""
+    def index(self, column, value, requirement="*"):
+        condition = column + '=\'' + value + '\''
+        command = "select " + requirement + " from " + self.sheet_name + " where " + condition
 
-        return list(self.cursor.execute(command))[0]
+
+        records = list(self.cursor.execute(command))
+        if len(records) > 0:
+            if requirement == "*":
+                return records[0]
+            else:
+                return records[0][0]
+        else:
+            return None
 
 
 class GUISheet(Sheet):
@@ -193,12 +199,5 @@ class GUISheet(Sheet):
 
 
 if __name__ == '__main__':
-    sheet = GUISheet('morespace_spaces', tk.Tk(), db='Database.db')
+    sheet = GUISheet('morespace_spaces', tk.Tk())
     sheet.run()
-
-    sheet = Sheet('morespace_spaces', db='Database.db')
-    # sheet.edit(('C', "More Space 10'x15' - Space C", 25.0, 'Day(s)'), ('C', "More Space 10'x15' - Space C", 250.0, 'Day(s)'))
-
-    # print(sheet.index(['rate'], ['23']))
-    for i in sheet.index(['rate'], ['23']):
-        print(i)
