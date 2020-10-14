@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d6c7b55-e1b3-4f96-997c-d365a6e8d56f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Database/Database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Sheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Sheet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +37,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/usef-kh/Invoice-Generator" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1iQqjquVZt15EHHrfgyYMaS8SJS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -49,47 +55,27 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Generator.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Yousef\Desktop\Projects\MakePlus\Invoice Generator\" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Generator">
-    <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Database" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Yousef\Desktop\Projects\MakePlus\Invoice Generator\Database\Database.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="Generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Yousef\anaconda3\envs\Invoice Generator\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Generator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -99,61 +85,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Module" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Modules" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="C:\Users\Yousef\anaconda3\envs\Invoice Generator\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Modules/Module.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="MoreSpace" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Modules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Modules/MoreSpace.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Sheet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Invoice Generator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Database" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database/Sheet.py" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Generator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -165,10 +109,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Generator" />
-        <item itemvalue="Python.Database" />
-        <item itemvalue="Python.Module" />
-        <item itemvalue="Python.Sheet" />
-        <item itemvalue="Python.MoreSpace" />
       </list>
     </recent_temporary>
   </component>
@@ -199,10 +139,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1080" y="269" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602485229897">
+    <state x="-1080" y="269" width="1080" height="954" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602653505484">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state x="-1080" y="269" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602485229897" />
+    <state x="-1080" y="269" width="1080" height="954" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602653505484" />
     <state x="-782" y="416" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602279660797">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
@@ -215,10 +155,10 @@
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
     <state x="-988" y="-234" width="896" height="1696" key="DiffContextDialog/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602098254729" />
-    <state x="-760" y="369" key="FileChooserDialogImpl" timestamp="1602535186173">
+    <state x="-760" y="369" key="FileChooserDialogImpl" timestamp="1602653484755">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
-    <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602535186173" />
+    <state x="-760" y="369" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602653484755" />
     <state x="569" y="384" key="FileChooserDialogImpl/-1080.-326.1080.1880/0.0.1920.1040@0.0.1920.1040" timestamp="1602383914053" />
     <state width="1059" height="699" key="GridCell.Tab.0.bottom" timestamp="1602570805839">
       <screen x="-1080" y="-326" width="1080" height="1880" />
@@ -256,6 +196,10 @@
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
     <state width="1059" height="684" key="GridCell.Tab.1.right/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602570456945" />
+    <state x="-1039" y="259" key="SettingsEditor" timestamp="1602653471579">
+      <screen x="-1080" y="-326" width="1080" height="1880" />
+    </state>
+    <state x="-1039" y="259" key="SettingsEditor/-1080.-326.1080.1880/0.0.1920.1040@-1080.-326.1080.1880" timestamp="1602653471579" />
     <state x="-693" y="527" key="VCS.ChangelistChooser" timestamp="1602098090271">
       <screen x="-1080" y="-326" width="1080" height="1880" />
     </state>
