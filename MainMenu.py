@@ -1,7 +1,6 @@
 import tkinter as tk
 from Database.Database import Database
 from Generator.Generator import Generator
-# from Modules.MoreSpace import MoreSpace
 from tkinter import ttk
 
 

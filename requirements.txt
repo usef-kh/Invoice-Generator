@@ -1,25 +1,6 @@
-altgraph==0.17
 Babel==2.8.0
 certifi==2020.6.20
-et-xmlfile==1.0.1
-future==0.18.2
-jdcal==1.4.1
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
-numpy @ file:///C:/ci/numpy_and_numpy_base_1596215850360/work
-olefile==0.46
-pandas @ file:///C:/ci/pandas_1598371563714/work
-pefile==2019.4.18
-Pillow @ file:///C:/ci/pillow_1594298230227/work
-pyinstaller==4.0
-pyinstaller-hooks-contrib==2020.9
-python-dateutil==2.8.1
 pytz==2020.1
 pywin32==228
-pywin32-ctypes==0.2.0
-six==1.15.0
 tkcalendar==1.6.1
 wincertstore==0.2
-xlrd==1.2.0
-pandas~=1.1.1

@@ -38,10 +38,8 @@ class Sheet:
     def delete(self, record):
         assert len(record) == len(self.columns)
 
-        command = "delete from " + self.sheet_name + " where "
-        for col, val in zip(self.columns[:-1], record[:-1]):
-            command += col + "=\"" + str(val) + "\" AND "
-        command += self.columns[-1] + "=\"" + str(record[-1]) + "\""
+        item = record[0]
+        command = "delete from " + self.sheet_name + " where oid = " + str(self.oids[item])
 
         self.cursor.execute(command)
         self.conn.commit()
