@@ -6,7 +6,7 @@ from tkinter import ttk
 from tkcalendar import DateEntry
 
 from Database.Sheet import Sheet
-from Modules.Module import Module
+from Generator.Module import Module
 
 
 class MediaSpace(Module):

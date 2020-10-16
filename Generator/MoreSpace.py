@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 from Database.Sheet import Sheet
-from Modules.Module import Module
+from Generator.Module import Module
 from datetime import datetime, date, timedelta
 from tkcalendar import DateEntry
 

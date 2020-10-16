@@ -77,7 +77,7 @@ class MediaSpace(DatabaseModule):
 
 class Database:
 
-    def __init__(self, root):
+    def __init__(self, root, menubar):
         self.root = root
         self.root.geometry('630x335')
 
