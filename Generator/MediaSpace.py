@@ -79,7 +79,8 @@ class MediaSpace(Module):
 
         discount_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
         tk.Label(discount_frame, text="Discount", font=('Arial', 10), pady=10, width=6).pack(side=tk.LEFT)
-        self.discount = tk.Spinbox(discount_frame, from_=0, to=101, increment=5, wrap=True, width=3)
+
+        self.discount = tk.Spinbox(discount_frame, from_=0, to=25, increment=5, wrap=True, width=3)
         self.discount.pack(side=tk.RIGHT, padx=20)
 
         discount_frame.grid(row=i + 2, column=0, sticky=tk.W)
