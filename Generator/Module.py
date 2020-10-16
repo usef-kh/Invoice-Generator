@@ -44,13 +44,13 @@ class Module:
                               borderwidth=0, highlightthickness=0)
 
         entries = []
-        for i, text in enumerate(['Name', 'Company', 'Credit']):
+        for i, text in enumerate(['Name', 'Company', 'Credit', 'Email', 'Number']):
             tk.Label(frame, text=text, font=('Arial', 10), padx=10, width=7, anchor=tk.W).grid(row=i, column=0, padx=10)
             entry = tk.Entry(frame, fg="black", bg="white", width=33)
             entry.grid(row=i, column=1, padx=10)
             entries.append(entry)
 
-        self.customer, self.company, self.credit = entries
+        self.customer, self.company, self.credit, self.email, self.number = entries
         frame.pack(padx=20, pady=2, anchor=tk.W)
 
     def place_item_reservation_fields(self):
