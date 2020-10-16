@@ -58,11 +58,9 @@ class MediaSpace(Module):
             options.append(str_num + ':' + '00 pm')
             options.append(str_num + ':' + '30 pm')
 
-        spaces = [record[0] for record in self.SPACES.get_table()]
-
         self.reservation_details = dict()
         for i in range(3):
-            item_field = ttk.Combobox(frame, values=spaces, width=22)
+            item_field = ttk.Combobox(frame, values=self.SPACES.list_items(), width=22)
             item_field.grid(row=i + 1, column=0)
 
             date_field = DateEntry(frame, width=8, background='black', foreground='white', borderwidth=2)
@@ -164,7 +162,7 @@ class MediaSpace(Module):
                 time = start + ' - ' + end
 
                 # Extract quantities
-                _, weekday_rate, weekend_rate, unit = self.SPACES.index('space', name)
+                _, weekday_rate, weekend_rate, unit = self.SPACES[name]
 
                 # Choose rate based on weekday
                 display_name = name
@@ -193,12 +191,13 @@ class MediaSpace(Module):
                 if rate <= 0 or qty <= 0:
                     raise Exception("Invalid rate or quanitity used")
 
-                name = item.get()
-                unit = self.ITEMS.index('item', name, 'unit')
-                if not unit:
-                    unit = 'Item'
+                item_name = item.get()
+                if item_name in self.ITEMS:
+                    _, _, unit = self.ITEMS[item_name]
+                else:
+                    unit = "Item"
 
-                reserved_items += [(name, qty, unit, rate)]
+                reserved_items += [(item_name, qty, unit, rate)]
 
         billables += reserved_items
 

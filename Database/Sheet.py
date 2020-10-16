@@ -9,8 +9,13 @@ class Sheet:
         self.conn = sqlite3.connect(db)
         self.cursor = self.conn.cursor()
 
-        self.cursor.execute("select * from " + sheet_name)
-        self.columns = [description[0] for description in self.cursor.description]
+        records = self.cursor.execute("select oid, * from " + sheet_name)
+        self.columns = [description[0] for description in self.cursor.description[1:]]
+
+        self.oids = {}
+        for record in list(records):
+            self.oids[record[1]] = record[0]
+
         self.sheet_name = sheet_name
 
     def get_table(self):
@@ -57,28 +62,21 @@ class Sheet:
         self.conn.commit()
 
     def get_oid(self, record):
-        command = "select oid from " + self.sheet_name + " where "
-        for col, val in zip(self.columns[:-1], record[:-1]):
-            command += col + "=\"" + str(val) + "\" AND "
-        command += self.columns[-1] + "=\"" + str(record[-1]) + "\""
+        return self.oids[record[0]]
 
-        results = list(self.cursor.execute(command))
+    def __getitem__(self, item):
+        command = "select * from " + self.sheet_name + " where oid = " + str(self.oids[item])
+        record = list(self.cursor.execute(command))[0]
+        return record
 
-        return results[0][0]
+    def __contains__(self, item):
+        return item in self.oids
 
-    def index(self, column, value, requirement="*"):
-        condition = column + '=\'' + value + '\''
-        command = "select " + requirement + " from " + self.sheet_name + " where " + condition
+    def list_items(self):
+        return list(self.oids.keys())
 
-
-        records = list(self.cursor.execute(command))
-        if len(records) > 0:
-            if requirement == "*":
-                return records[0]
-            else:
-                return records[0][0]
-        else:
-            return None
+    def close(self):
+        self.conn.close()
 
 
 class GUISheet(Sheet):
@@ -199,5 +197,8 @@ class GUISheet(Sheet):
 
 
 if __name__ == '__main__':
-    sheet = GUISheet('morespace_spaces', tk.Tk())
-    sheet.run()
+    # sheet = GUISheet('morespace_spaces', tk.Tk())
+    # sheet.run()
+
+    sheet = Sheet('morespace_spaces')
+    print(sheet['A'])

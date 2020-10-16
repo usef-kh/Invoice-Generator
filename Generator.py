@@ -1,16 +1,14 @@
 import tkinter as tk
-from tkinter import ttk
-
+from Database.Database import Database
 from Modules.MediaSpace import MediaSpace
 from Modules.MoreSpace import MoreSpace
+from tkinter import ttk
 
-from Database.Database import Database
 
 class Generator:
 
     def __init__(self):
         self.root = tk.Tk()
-
 
         self.root.wm_iconbitmap('Graphics/logo.ico')
         self.modules = ["More Space", "Media Space", "Fabrication Services", "CNC Milling", "Database"]
@@ -25,8 +23,9 @@ class Generator:
 
     def new(self):
         if self.current_frame:
-            self.current_frame.destroy()
+            self.current_module.close()
             self.current_module = None
+            self.current_frame = None
 
         self.root.geometry('300x275')
         self.root.title("Invoice Generator")
@@ -36,7 +35,8 @@ class Generator:
         tk.Label(self.current_frame, text='Invoice Generator', font=('Arial', 14)).pack(pady=20)
 
         for name in self.modules:
-            button = ttk.Button(self.current_frame, text=name, width=25, command=lambda module=name: self.create(module))
+            button = ttk.Button(self.current_frame, text=name, width=25,
+                                command=lambda module=name: self.create(module))
             button.pack(pady=5)
 
         self.current_frame.pack()
@@ -49,7 +49,7 @@ class Generator:
                    'Media Space': MediaSpace,
                    'Fabrication Services': MoreSpace,
                    'CNC Milling': MoreSpace,
-                    'Database': Database}
+                   'Database': Database}
 
         module = modules[module_name]
 
@@ -58,8 +58,6 @@ class Generator:
         self.current_frame = self.current_module.master
 
         my_module.start()
-
-
 
     def create_menubar(self):
 
@@ -71,6 +69,7 @@ class Generator:
         new_menubar = tk.Menu(file_menubar, tearoff=False)
         for name in self.modules:
             new_menubar.add_command(label=name, command=lambda module=name: self.create(module))
+
         self.menubar.add_command(label='Main Menu', command=self.new)
         self.menubar.add_cascade(label='File', menu=file_menubar)
         file_menubar.add_cascade(label='New... ', menu=new_menubar)

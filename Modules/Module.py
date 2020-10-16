@@ -85,7 +85,7 @@ class Module:
         def set_rate(event):
             table_entry = self.table_fields[event.widget]
             choice = event.widget.get()
-            rate = self.ITEMS.index('item', choice, 'rate')
+            _, rate, _ = self.ITEMS[choice]
 
             table_entry[0].delete(0, "end")
             table_entry[0].insert(0, rate)
@@ -93,9 +93,7 @@ class Module:
             table_entry[1].delete(0, "end")
             table_entry[1].insert(0, 1)
 
-        items = [row[0] for row in self.ITEMS.get_table()]
-
-        item_field = ttk.Combobox(self.table_frame, values=items, font=('Arial', 9), width=25)
+        item_field = ttk.Combobox(self.table_frame, values=self.ITEMS.list_items(), font=('Arial', 9), width=25)
         item_field.grid(row=self.counter, column=0, sticky="NSEW")
 
         item_field.bind("<<ComboboxSelected>>", set_rate)
@@ -198,6 +196,12 @@ class Module:
         finally:
             Workbook.Close(SaveChanges=False)
             app = None
+
+    def close(self):
+        self.master.destroy()
+
+    def store_customer(self):
+        pass
 
 
 if __name__ == '__main__':

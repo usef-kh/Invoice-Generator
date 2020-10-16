@@ -1,11 +1,15 @@
 import os
 import tkinter as tk
-from datetime import datetime, date, timedelta
-
-from tkcalendar import DateEntry
-
 from Database.Sheet import Sheet
 from Modules.Module import Module
+from datetime import datetime, date, timedelta
+from tkcalendar import DateEntry
+
+
+class Checkbox:
+    def __init__(self, name):
+        self.name = name
+        self.state = tk.IntVar()
 
 
 class MoreSpace(Module):
@@ -35,14 +39,13 @@ class MoreSpace(Module):
 
         spaces_frame = tk.LabelFrame(frame, borderwidth=0, highlightthickness=0)
 
-        codes = [record[0] for record in self.SPACES.get_table()]
+        codes = [code[0] for code in self.SPACES.list_items()]
 
-        self.space_reservation = [(code, tk.IntVar()) for code in sorted(codes)]
-        self.tools_reservation = ('Tools', tk.IntVar())
-        for i, box in enumerate(self.space_reservation + [self.tools_reservation]):
-            name, space = box
-            checkbox = tk.Checkbutton(spaces_frame, text=name, variable=space)
-            checkbox.pack(side=tk.LEFT)
+        self.space_reservation = [Checkbox(code) for code in sorted(codes)]
+        self.tools_reservation = Checkbox('Tools')
+        for checkbox in self.space_reservation + [self.tools_reservation]:
+            temp = tk.Checkbutton(spaces_frame, text=checkbox.name, variable=checkbox.state)
+            temp.pack(side=tk.LEFT)
 
         spaces_frame.pack(padx=20, anchor=tk.W)
 
@@ -165,17 +168,17 @@ class MoreSpace(Module):
         num_of_billable_days = num_of_days - day_exclusions
 
         booked_spaces = []
-        for box_name, checkbox in self.space_reservation:  # Only Spaces
-            if checkbox.get():
-                _, description, rate, unit = self.SPACES.index('code', box_name)
+        for checkbox in self.space_reservation:
+            if checkbox.state.get():
+                _, description, rate, unit = self.SPACES[checkbox.name]
                 booked_spaces += [(description, num_of_billable_days, unit, float(rate))]
 
         billables = [space for space in booked_spaces]
         num_of_billable_tool_days = 0
-        if self.tools_reservation[1].get():     # Tools
+        if self.tools_reservation.state.get():  # Tools
             num_of_billable_tool_days = num_of_billable_days - tool_exclusions
 
-            item, rate, unit = self.EXTRAS.index('item', "Tool Access")
+            item, rate, unit = self.EXTRAS["Tool Access"]
 
             billables += [(item, num_of_billable_tool_days, unit, float(rate))]
 
@@ -185,8 +188,8 @@ class MoreSpace(Module):
             if additional_makers == 1:
                 unit = 'Person'
 
-            rate = self.EXTRAS.index('item', "Additional Maker(s)", 'rate')
-            billables += [("Additional Maker(s)", additional_makers, unit, float(rate))]
+            item, rate, _ = self.EXTRAS["Additional Maker(s)"]
+            billables += [(item, additional_makers, unit, float(rate))]
 
         reserved_items = []
         for item, info in self.table_fields.items():
@@ -200,12 +203,13 @@ class MoreSpace(Module):
                 if rate <= 0 or qty <= 0:
                     raise Exception("Invalid rate or quanitity used")
 
-                name = item.get()
-                unit = self.ITEMS.index('item', name, 'unit')
-                if not unit:
-                    unit = 'Item'
+                item_name = item.get()
+                if item_name in self.ITEMS:
+                    _, _, unit = self.ITEMS[item_name]
+                else:
+                    unit = "Item"
 
-                reserved_items += [(name, qty, unit, rate)]
+                reserved_items += [(item_name, qty, unit, rate)]
 
         billables += reserved_items
 
@@ -251,7 +255,7 @@ class MoreSpace(Module):
             if num_of_billable_tool_days < 0:
                 raise Exception("Too many tool Exclusions")
 
-            elif not self.tools_reservation[1].get() and num_of_billable_tool_days > 0:
+            elif not self.tools_reservation.state.get() and num_of_billable_tool_days > 0:
                 raise Exception("Tool exclusion with no tools!")
 
             for name, qty, unit, rate in reserved_items:
@@ -310,8 +314,10 @@ class MoreSpace(Module):
 
         self.credit.delete(0, 'end')
 
-        for name, space in self.space_reservation:
-            space.set(0)
+        for space in self.space_reservation:
+            space.state.set(0)
+
+        self.tools_reservation.state.set(0)
 
         self.additional_makers.delete(0, 'end')
         self.tool_exclusions.delete(0, 'end')
@@ -324,6 +330,11 @@ class MoreSpace(Module):
 
         self.notes.delete(1.0, 'end')
         self.notes.insert(1.0, 'Please make your payment through Paypal to info@makeplus.us')
+        
+    def close(self):
+        super(MoreSpace, self).close()
+        for sheet in [self.SPACES, self.ITEMS, self.EXTRAS]:
+            sheet.close()
 
 
 if __name__ == '__main__':
