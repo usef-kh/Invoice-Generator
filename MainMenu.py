@@ -63,8 +63,8 @@ class MainMenu:
         for name in self.modules:
             menu_menubar.add_command(label=name, command=lambda module=name: self.create(module))
 
-        menu_menubar.add_separator()
-        menu_menubar.add_command(label='Main Menu', command=self.new)
+        # menu_menubar.add_separator()
+        # menu_menubar.add_command(label='Main Menu', command=self.new)
 
         self.menubar.add_cascade(label='Menu', menu=menu_menubar)
 
