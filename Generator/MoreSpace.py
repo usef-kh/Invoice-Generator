@@ -18,7 +18,7 @@ class MoreSpace(Module):
         super(MoreSpace, self).__init__(root)
         self.root.title("Invoice Generator - More Space")
         self.module_name = 'MoreSpace'
-        self.root.geometry('450x585')
+        self.root.geometry('450x610')
 
     def load_database(self):
         self.SPACES = Sheet('morespace_spaces')
