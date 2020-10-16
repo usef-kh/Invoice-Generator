@@ -89,7 +89,8 @@ class GUISheet(Sheet):
         self.tree.pack(padx=10, pady=10)
 
         for i, column in enumerate(self.columns):
-            self.tree.heading(str(i), text=column)
+            txt = " ".join(word.capitalize() for word in column.split("_"))
+            self.tree.heading(str(i), text=txt)
             self.tree.column(str(i), minwidth=10, width=150)
 
         for record in self.get_table():
