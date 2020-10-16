@@ -1,6 +1,12 @@
+altgraph==0.17
 Babel==2.8.0
 certifi==2020.6.20
+future==0.18.2
+pefile==2019.4.18
+pyinstaller==4.0
+pyinstaller-hooks-contrib==2020.9
 pytz==2020.1
 pywin32==228
+pywin32-ctypes==0.2.0
 tkcalendar==1.6.1
 wincertstore==0.2
